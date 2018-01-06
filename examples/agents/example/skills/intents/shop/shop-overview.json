@@ -1,0 +1,18 @@
+{
+  "name": "shop",
+  "contexts": {
+    "output_contexts": [
+      ["candy-choose", 3]
+    ]
+  },
+  "user_says": [
+    "Ich möchte süßigkeiten",
+    "Ich möchte etwas kaufen"
+  ],
+  "action": "shop.overview",
+  "response": {
+    "text_response": [
+      "Wähle zwischen: Zuckerwatte & Pocky..."
+    ]
+  }
+}

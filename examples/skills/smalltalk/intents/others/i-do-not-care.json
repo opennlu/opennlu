@@ -1,0 +1,12 @@
+{
+  "name": "skill.small-talk.other.i-do-not-care",
+  "user_says": [
+    "ist mir egal"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Alles klar!"
+    ]
+  }
+}

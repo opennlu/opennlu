@@ -1,0 +1,13 @@
+{
+  "name": "skill.small-talk.about.talk-to-me",
+  "user_says": [
+    "Rede mit mir"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Ich rede gerne mit dir!",
+      "Ok. Du hast meine volle Aufmerksamkeit!"
+    ]
+  }
+}

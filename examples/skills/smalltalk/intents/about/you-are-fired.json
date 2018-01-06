@@ -1,0 +1,12 @@
+{
+  "name": "skill.small-talk.you-are-fired",
+  "user_says": [
+    "Du bist gefeuert"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Tja. Zumindest bekomme ich eine gute Abfindung."
+    ]
+  }
+}

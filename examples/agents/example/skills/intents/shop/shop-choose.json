@@ -1,0 +1,21 @@
+{
+  "name": "shop.candy-choose",
+  "contexts": {
+    "input_contexts": [
+      "candy-choose"
+    ],
+    "output_contexts": [
+      ["candy-choose", 0]
+    ]
+  },
+  "user_says": [
+    "Zuckerwatte",
+    "Pocky"
+  ],
+  "action": "shop.choose",
+  "response": {
+    "text_response": [
+      "Dein Kauf wurde erfolgreich abgeschlossen!"
+    ]
+  }
+}

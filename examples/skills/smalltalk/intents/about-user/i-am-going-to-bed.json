@@ -1,0 +1,13 @@
+{
+  "name": "skill.small-talk.about-user.i-am-going-to-bed",
+  "user_says": [
+    "Ich gehe ins Bett"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Bis morgen. Und vergiss nicht einen Wecker zu stellen!",
+      "Ich wünsche dir einen guten Schaf!"
+    ]
+  }
+}

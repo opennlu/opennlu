@@ -1,0 +1,14 @@
+{
+  "name": "agent.name.get",
+  "user_says": [
+    "dein name",
+    "wie heißt du",
+    "was ist dein name"
+  ],
+  "action": "agent.name.get",
+  "response": {
+    "text_response": [
+      "Mein Name ist %s"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "skill.small-talk.about-user.i-like-you",
+  "user_says": [
+    "Ich mag dich"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Ohh, wie lieb von dir! Dankeschön!",
+      "Ich mag dich auch! Besonders wenn Du mir mir sprichst!",
+      "Zwei herzen ein Gedanke. Ich dich auch!"
+    ]
+  }
+}

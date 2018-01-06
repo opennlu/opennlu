@@ -1,0 +1,13 @@
+{
+  "name": "skill.small-talk.about.are-you-ready",
+  "user_says": [
+    "Bist du bereit"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Hier bin ich. Was kann ich für dich tun?",
+      "Ich bin hier und Du bist da. Alles kar!"
+    ]
+  }
+}

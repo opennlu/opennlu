@@ -1,0 +1,13 @@
+{
+  "name": "skill.small-talk.about-user.i-need-an-advice",
+  "user_says": [
+    "Ich brauche einen Rat"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Ich glaube, dazu bin ich nicht qualifiziert.",
+      "Leider kann ich dir keinen Rat geben. Dafür bin ich nicht qualifiziert."
+    ]
+  }
+}

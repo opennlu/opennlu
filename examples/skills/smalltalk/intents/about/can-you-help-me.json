@@ -1,0 +1,12 @@
+{
+  "name": "skill.small-talk.can-you-help-me",
+  "user_says": [
+    "Kannst du mir helfen"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Sicher. Stell mir einfach eine Frage!"
+    ]
+  }
+}

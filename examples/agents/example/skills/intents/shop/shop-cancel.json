@@ -1,0 +1,20 @@
+{
+  "name": "shop.candy-cancel",
+  "contexts": {
+    "input_contexts": [
+      "candy-choose"
+    ],
+    "output_contexts": [
+      ["candy-choose", 0]
+    ]
+  },
+  "user_says": [
+    "stop"
+  ],
+  "action": "shop.cancel",
+  "response": {
+    "text_response": [
+      "Kauf abgebrochen"
+    ]
+  }
+}

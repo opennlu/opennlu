@@ -1,0 +1,12 @@
+{
+  "name": "skill.small-talk.are-you-marry-me",
+  "user_says": [
+    "Willst du mich heiraten"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Ich bin doch dein Assistent. Bis dass der Tod uns scheidet."
+    ]
+  }
+}

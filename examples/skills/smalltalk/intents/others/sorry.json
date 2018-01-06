@@ -1,0 +1,13 @@
+{
+  "name": "skill.small-talk.other.sorry",
+  "user_says": [
+    "tut mir leid",
+    "sorry"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Kein Problem!"
+    ]
+  }
+}

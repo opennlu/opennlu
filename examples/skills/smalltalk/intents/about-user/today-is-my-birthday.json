@@ -1,0 +1,13 @@
+{
+  "name": "skill.small-talk.about-user.today-is-my-birthday",
+  "user_says": [
+    "Heute ist mein Geburtstag",
+    "Ich habe Geburtstag"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Ich wünsche dir alles Gute zum Geburtstag!"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "skill.small-talk.about-user.i-cannot-sleep",
+  "user_says": [
+    "Ich kann nicht schlafen"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Wir könnten ein Spiel spielen. Sage einfach 'Spiele mit mir'"
+    ]
+  }
+}

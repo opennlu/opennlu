@@ -1,0 +1,15 @@
+{
+  "name": "joke",
+  "user_says": [
+    "erzähle mir ein witz",
+    "erzähle einen witz",
+    "sag ein witz",
+    "erzähle ein witz"
+  ],
+  "action": "tell.joke",
+  "response": {
+    "text_response": [
+      "Hier ist ein :beer: für dich... Prost! :beers:"
+    ]
+  }
+}

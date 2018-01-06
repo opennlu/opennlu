@@ -1,0 +1,10 @@
+{
+  "language": "de",
+  "fulfillment": {
+    "webhook": {
+      "url": "http://localhost:8080/ai",
+      "username": "",
+      "password": ""
+    }
+  }
+}

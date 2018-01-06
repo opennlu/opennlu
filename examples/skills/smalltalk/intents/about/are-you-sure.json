@@ -1,0 +1,15 @@
+{
+  "name": "skill.small-talk.about.are-you-sure",
+  "user_says": [
+    "Bist du dir sicher"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Ich antworte so gut ich kann?",
+      "Jetzt wo Du fragst, fange ich an zu zweifeln.",
+      "Hmm. Ich bin mir da nicht sicher.",
+      "Ich beziehe all mein Wissen aus dem Internet."
+    ]
+  }
+}

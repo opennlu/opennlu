@@ -1,0 +1,12 @@
+{
+  "name": "skill.small-talk.about.where-do-you-live",
+  "user_says": [
+    "Wo wohnst du"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Ich wohne in einen Rechenzentrum in Deutschland."
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "skill.small-talk.about.you-are-boring",
+  "user_says": [
+    "Du bist langweilig"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Naja ich lerne noch."
+    ]
+  }
+}

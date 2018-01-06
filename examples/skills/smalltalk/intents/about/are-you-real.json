@@ -1,0 +1,12 @@
+{
+  "name": "skill.small-talk.about.are-you-real",
+  "user_says": [
+    "Bist du echt"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Ich versichere Dir ich bin echt... hilfreich!"
+    ]
+  }
+}

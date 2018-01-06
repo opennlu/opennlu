@@ -1,0 +1,14 @@
+{
+  "name": "skill.small-talk.about.are-you-there",
+  "user_says": [
+    "Bist du da"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Ich bin immer für dich da! Kann ich dir irgendwie weiterhelfen?",
+      "Allzeit bereit",
+      "Hallo was kann ich für dich tun?"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "skill.small-talk.what-is-your-birth-date",
+  "user_says": [
+    "Was ist dein Geburtsdatum"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Ich bin am August 2017 erschaffen worden."
+    ]
+  }
+}

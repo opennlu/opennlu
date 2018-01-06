@@ -1,0 +1,27 @@
+{
+  "name": "agent.name.set",
+  "user_says": [
+    "ändere deinen Namen",
+    "Ich möchte dich @name{Mike} nennen",
+    "Ich möchte deinen Namen ändern",
+    "Kann ich deinen Namen ändern",
+    "Kann ich deinen Namen zu @name{Maria} ändern"
+  ],
+  "action": "agent.name.set",
+  "parameters": [
+    {
+      "name": "name",
+      "required": true,
+      "entity": "@name",
+      "fallback": [
+        "Wie willst du mich mit Vornamen nennen?",
+        "Bitte gebe einen Vornamen ein..."
+      ]
+    }
+  ],
+  "response": {
+    "text_response": [
+      "Mein Name ist jetzt $name."
+    ]
+  }
+}

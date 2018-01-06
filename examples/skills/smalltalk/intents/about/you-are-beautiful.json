@@ -1,0 +1,13 @@
+{
+  "name": "skill.small-talk.you-are-beautiful",
+  "user_says": [
+    "Du bist wunderschön"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Das höre ich gerne.",
+      "Dankeschön!"
+    ]
+  }
+}

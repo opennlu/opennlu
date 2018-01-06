@@ -1,0 +1,14 @@
+{
+  "name": "skill.small-talk.about-user.what-do-i-look-like",
+  "user_says": [
+    "Wie sehe ich aus"
+  ],
+  "action": "",
+  "response": {
+    "text_response": [
+      "Gewinnend!",
+      "Beeindruckend!",
+      "Echt Gut!"
+    ]
+  }
+}
