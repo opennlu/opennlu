@@ -24,9 +24,12 @@ public class AgentResponse {
     private final Map<String, String> entityValues;
     private final List<Context> outputContexts = new ArrayList<>();
     private final double score;
+    private final long startTime;
     private Parameter missedParameter = null;
+    private long executionTime = 0;
 
-    public AgentResponse(String message, Intent intent, final List<Context> inputContexts, Map<String, String> inputParameters, double score) throws Exception {
+    public AgentResponse(long startTime, String message, Intent intent, final List<Context> inputContexts, Map<String, String> inputParameters, double score) throws Exception {
+        this.startTime = startTime;
         this.message = message;
         this.intent = intent;
         this.entityValues = new HashMap<>();
@@ -133,5 +136,15 @@ public class AgentResponse {
 
     public double getScore() {
         return score;
+    }
+
+    public long getExecutionTime() {
+        return executionTime;
+    }
+
+    public void stopMeasurement() {
+        if(executionTime == 0) {
+            executionTime = System.nanoTime() - startTime;
+        }
     }
 }

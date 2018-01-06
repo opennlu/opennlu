@@ -2,6 +2,9 @@ package org.opennlu.jdbi;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 import org.opennlu.OpenNLU;
+import org.opennlu.agent.Agent;
+import org.opennlu.agent.AgentResponse;
+import org.opennlu.agent.session.Session;
 import org.opennlu.jdbi.mapper.*;
 import org.opennlu.json.ConfigSection;
 import org.skife.jdbi.v2.DBI;
@@ -91,5 +94,21 @@ public class Database {
                 .bind("identifier", intentId)
                 .map(new StringMapper("content"))
                 .list();
+    }
+
+    public int createSession(Agent agent) {
+        return handle.insert("INSERT INTO `ai_sessions` (ai_agent_id, created_at, updated_at) VALUES (?, NOW(), NOW());", agent.getId());
+    }
+
+    public void createQuery(Agent agent, Session session, AgentResponse response) {
+        if(response.getMessage().length() > 0) {
+            handle.createStatement("INSERT INTO `ai_queries` (query, exec_time, ai_intent_id, ai_session_id, ai_agent_id, created_at, updated_at) VALUES (:query, :exec_time, :intent_id, :session_id, :agent_id, NOW(), NOW());")
+                    .bind("query", response.getMessage())
+                    .bind("exec_time", response.getExecutionTime())
+                    .bind("intent_id", response.getIntent().getId())
+                    .bind("session_id", session.getId())
+                    .bind("agent_id", agent.getId())
+                    .execute();
+        }
     }
 }

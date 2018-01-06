@@ -3,7 +3,6 @@ package org.opennlu.agent.intent;
 import org.opennlu.agent.Agent;
 import org.opennlu.agent.context.Context;
 import org.opennlu.agent.entity.Entity;
-import org.opennlu.jdbi.mapper.IntentMapper;
 import org.opennlu.json.ConfigSection;
 
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ public class IntentManager {
 
         // Register fallback intent
         this.intents.add(new Intent(
+                0,
                 "fallback",
                 new ArrayList<>(),
                 new ArrayList<>(),
@@ -44,10 +44,6 @@ public class IntentManager {
     }
 
     public Intent registerIntent(ConfigSection intentConfiguration) throws Exception {
-
-        int intentVersion = intentConfiguration.has("schema") ?
-                intentConfiguration.getInt("schema") :
-                1;
 
         if(!intentConfiguration.has("name")) {
             throw new Exception("The parameter 'name' is missing.");
@@ -90,19 +86,14 @@ public class IntentManager {
                 ConfigSection contextSection = intentConfiguration.getConfigSection("contexts");
 
                 Intent intent = new Intent(
+                        intentConfiguration.getInt("id"), // todo add support to register new intents
                         intentName,
                         contextSection.has("input_contexts") ?
-                            (
-                                    intentVersion == IntentMapper.INTENT_SCHEMA_VERSION ?
-                                            Context.fromJson2Array(contextSection.getJsonArray("input_contexts")) :
-                                            Context.fromJsonArray(contextSection.getJsonArray("input_contexts"))
-                            ) : new ArrayList<>(),
-                        contextSection.has("output_contexts")?
-                            (
-                                    intentVersion == IntentMapper.INTENT_SCHEMA_VERSION ?
-                                            Context.fromJson2Array(contextSection.getJsonArray("output_contexts")) :
-                                            Context.fromJsonArray(contextSection.getJsonArray("output_contexts"))
-                            ) :new ArrayList<>(),
+                                Context.fromJsonArray(contextSection.getJsonArray("input_contexts")) :
+                                new ArrayList<>(),
+                        contextSection.has("output_contexts") ?
+                                Context.fromJsonArray(contextSection.getJsonArray("output_contexts")) :
+                                new ArrayList<>(),
                         intentConfiguration.getList("user_says"),
                         intentConfiguration.getString("action"),
                         parameterList,

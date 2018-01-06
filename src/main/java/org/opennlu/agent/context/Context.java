@@ -46,11 +46,10 @@ public class Context {
     }
 
     /**
-     * New parser for schema 2.
      * @param jsonArray
      * @return
      */
-    public static List<Context> fromJson2Array(JsonArray jsonArray) {
+    public static List<Context> fromJsonArray(JsonArray jsonArray) {
         List<Context> contextList = new ArrayList<>();
         for (JsonElement jsonElement : jsonArray) {
             JsonObject jsonContextObject = jsonElement.getAsJsonObject();
@@ -58,25 +57,6 @@ public class Context {
                 contextList.add(new Context(jsonContextObject.get("name").getAsString(), jsonContextObject.get("ttl").getAsInt()));
             } else {
                 contextList.add(new Context(jsonContextObject.get("name").getAsString()));
-            }
-        }
-
-        return contextList;
-    }
-
-    /**
-     * @deprecated please use fromJson2Array()
-     * @param jsonArray
-     * @return
-     */
-    public static List<Context> fromJsonArray(JsonArray jsonArray) {
-        List<Context> contextList = new ArrayList<>();
-        for (JsonElement jsonElement : jsonArray) {
-            if(jsonElement.isJsonPrimitive()) {
-                contextList.add(new Context(jsonElement.getAsString()));
-            } else {
-                JsonArray jsonContextArray = jsonElement.getAsJsonArray();
-                contextList.add(new Context(jsonContextArray.get(0).getAsString(), jsonContextArray.get(1).getAsInt()));
             }
         }
 

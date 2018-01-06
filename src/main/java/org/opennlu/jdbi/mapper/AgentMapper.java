@@ -11,6 +11,7 @@ public class AgentMapper implements ResultSetMapper<ConfigSection> {
     @Override
     public ConfigSection map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
         ConfigSection config = new ConfigSection();
+        config.set("id", resultSet.getString("id"));
         config.set("language", resultSet.getString("language"));
         ConfigSection webhookSection = config
                 .getConfigSection("fulfillment")

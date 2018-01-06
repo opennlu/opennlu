@@ -15,6 +15,7 @@ import java.util.List;
  * Created by René Preuß on 6/2/2017.
  */
 public class Intent {
+    private final int id;
     private final List<String> textResponses;
     private final String name;
     private final List<DocumentSample> userSays;
@@ -24,8 +25,8 @@ public class Intent {
     private final List<String> rawUserSays;
     private String action;
 
-    public Intent(String name, List<Context> inputContexts, List<Context> outputContexts, List<String> userSays, String action, List<Parameter> parameterList, List<String> textResponses) throws IOException {
-        super();
+    public Intent(int id, String name, List<Context> inputContexts, List<Context> outputContexts, List<String> userSays, String action, List<Parameter> parameterList, List<String> textResponses) throws IOException {
+        this.id = id;
         this.name = name;
         this.inputContexts = inputContexts;
         this.outputContexts = outputContexts;
@@ -111,5 +112,9 @@ public class Intent {
         jsonResponseObject.add("text_response", jsonTextResponseArray);
         jsonIntentObject.add("response", jsonResponseObject);
         return jsonIntentObject;
+    }
+
+    public int getId() {
+        return id;
     }
 }

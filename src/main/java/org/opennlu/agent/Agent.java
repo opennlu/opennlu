@@ -16,11 +16,13 @@ public class Agent {
     private final IntentManager intentManager;
     private final ConfigSection configSection;
     private final TrainingManager trainingManager;
+    private final OpenNLU openNLU;
 
     private SkillManager skillManager;
     private SessionManager sessionManager;
 
     public Agent(OpenNLU openNLU, int id) throws Exception {
+        this.openNLU = openNLU;
         this.configSection = openNLU.getDatabase().getAgentConfig(id);
 
         // Entities & Intents & ML
@@ -32,6 +34,10 @@ public class Agent {
 
         // TODO add primary skills?
         //getSkillManager().addSkill(new Skill("example"));
+    }
+
+    public int getId() {
+        return configSection.getInt("id");
     }
 
     public String getLanguage() {
@@ -60,5 +66,9 @@ public class Agent {
 
     public SessionManager getSessionManager() {
         return sessionManager;
+    }
+
+    public OpenNLU getNLU() {
+        return openNLU;
     }
 }

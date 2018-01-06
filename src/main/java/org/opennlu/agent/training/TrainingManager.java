@@ -52,8 +52,8 @@ public class TrainingManager {
     }
 
     public AgentResponse parse(String message, List<Context> inputContexts, Map<String, String> inputParameters) throws Exception {
-
-        AgentResponse fulfilmentResponse = handleFulfilment(message, inputContexts, inputParameters);
+        long startTime = System.nanoTime();
+        AgentResponse fulfilmentResponse = handleFulfilment(startTime, message, inputContexts, inputParameters);
 
         if(fulfilmentResponse != null) {
             return fulfilmentResponse;
@@ -62,7 +62,7 @@ public class TrainingManager {
         DocumentCategorizerME categorizer = findCategorizer(inputContexts);
 
         if(categorizer == null)
-            return new AgentResponse(message, agent.getIntentManager().getFallbackIntent(), inputContexts, inputParameters, 0);
+            return new AgentResponse(startTime, message, agent.getIntentManager().getFallbackIntent(), inputContexts, inputParameters, 0);
 
         double[] outcome = categorizer.categorize(message.toLowerCase());
         double score = 0;
@@ -78,12 +78,12 @@ public class TrainingManager {
         avgScore = avgScore / categorizer.getNumberOfCategories();
 
         if(score >= MIN_SCORE || (ALLOW_AVG_SCORE && score >= (avgScore+AVG_SCORE_DIFF)))
-            return new AgentResponse(message, agent.getIntentManager().findIntent(bestCategory), inputContexts, inputParameters, score);
+            return new AgentResponse(startTime, message, agent.getIntentManager().findIntent(bestCategory), inputContexts, inputParameters, score);
 
-        return new AgentResponse(message, agent.getIntentManager().getFallbackIntent(), inputContexts, inputParameters, score);
+        return new AgentResponse(startTime, message, agent.getIntentManager().getFallbackIntent(), inputContexts, inputParameters, score);
     }
 
-    private AgentResponse handleFulfilment(String message, List<Context> inputContexts, Map<String, String> inputParameters) throws Exception {
+    private AgentResponse handleFulfilment(long startTime, String message, List<Context> inputContexts, Map<String, String> inputParameters) throws Exception {
         Intent fulfilmentIntent = null;
         String fulfilmentMessage = null;
         double fulfilmentScore = 0;
@@ -101,7 +101,7 @@ public class TrainingManager {
         }
 
         if(fulfilmentIntent != null)
-            return new AgentResponse(fulfilmentMessage, fulfilmentIntent, inputContexts, inputParameters, fulfilmentScore);
+            return new AgentResponse(startTime, fulfilmentMessage, fulfilmentIntent, inputContexts, inputParameters, fulfilmentScore);
         else
             inputParameters.clear();
 

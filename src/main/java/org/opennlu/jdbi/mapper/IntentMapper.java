@@ -20,6 +20,7 @@ public class IntentMapper implements ResultSetMapper<ConfigSection> {
     public ConfigSection map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
         ConfigSection config = new ConfigSection();
         config.set("schema", INTENT_SCHEMA_VERSION);
+        config.set("id", resultSet.getString("id"));
         config.set("name", resultSet.getString("name"));
         config.getConfigSection("contexts")
                 .setConfigSectionList("input_contexts", openNLU.getDatabase().getIntentInputContexts(resultSet.getInt("id")));
