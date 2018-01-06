@@ -1,7 +1,7 @@
 package org.opennlu.agent.skill;
 
 import org.opennlu.agent.Agent;
-import org.opennlu.json.JsonConfig;
+import org.opennlu.json.ConfigSection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +18,12 @@ public class SkillManager {
     }
 
     public Skill addSkill(Skill skill) throws Exception {
-        for(JsonConfig entity : skill.getEntities()) {
+        for(ConfigSection entity : skill.getEntities()) {
             agent.getEntityManager().registerEntity(entity);
         }
         agent.getTrainingManager().trainEntities();
 
-        for(JsonConfig intent : skill.getIntents()) {
+        for(ConfigSection intent : skill.getIntents()) {
             agent.getIntentManager().registerIntent(intent);
         }
 

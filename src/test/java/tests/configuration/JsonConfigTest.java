@@ -1,5 +1,6 @@
 package tests.configuration;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.opennlu.json.JsonConfig;
 
@@ -16,5 +17,7 @@ public class JsonConfigTest {
         JsonConfig configuration = JsonConfig.loadConfiguration(jsonFile);
         configuration.set("test", "test");
         configuration.save(jsonFile);
+
+        Assert.assertTrue(jsonFile.delete());
     }
 }

@@ -2,6 +2,7 @@ package org.opennlu.agent.context;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,30 @@ public class Context {
         return hashCode;
     }
 
+    /**
+     * New parser for schema 2.
+     * @param jsonArray
+     * @return
+     */
+    public static List<Context> fromJson2Array(JsonArray jsonArray) {
+        List<Context> contextList = new ArrayList<>();
+        for (JsonElement jsonElement : jsonArray) {
+            JsonObject jsonContextObject = jsonElement.getAsJsonObject();
+            if(jsonContextObject.has("ttl")) {
+                contextList.add(new Context(jsonContextObject.get("name").getAsString(), jsonContextObject.get("ttl").getAsInt()));
+            } else {
+                contextList.add(new Context(jsonContextObject.get("name").getAsString()));
+            }
+        }
+
+        return contextList;
+    }
+
+    /**
+     * @deprecated please use fromJson2Array()
+     * @param jsonArray
+     * @return
+     */
     public static List<Context> fromJsonArray(JsonArray jsonArray) {
         List<Context> contextList = new ArrayList<>();
         for (JsonElement jsonElement : jsonArray) {

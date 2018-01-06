@@ -7,7 +7,6 @@ import opennlp.tools.doccat.DocumentSample;
 import opennlp.tools.util.ObjectStream;
 import opennlp.tools.util.ObjectStreamUtils;
 import opennlp.tools.util.TrainingParameters;
-
 import org.opennlu.agent.Agent;
 import org.opennlu.agent.AgentResponse;
 import org.opennlu.agent.context.Context;

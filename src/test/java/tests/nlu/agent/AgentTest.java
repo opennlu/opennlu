@@ -2,12 +2,12 @@ package tests.nlu.agent;
 
 import org.junit.After;
 import org.junit.Before;
+import org.opennlu.OpenNLU;
 import org.opennlu.agent.Agent;
 import org.opennlu.agent.AgentResponse;
 import org.opennlu.agent.context.Context;
 import org.opennlu.agent.skill.Skill;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,17 +17,21 @@ import java.util.Map;
  */
 public class AgentTest {
     private Agent agent;
+    private OpenNLU openNLU;
 
     @Before
     public final void setUp() throws Exception {
         System.out.println("AgentTest.setUp");
-        agent = new Agent(new File("examples/agents/example"));
+        openNLU = new OpenNLU();
+        agent = new Agent(getNLU(), 1);
         leanSkills();
     }
 
     private void leanSkills() throws Exception {
         // Add smalltalk skills
-        agent.getSkillManager().addSkill(new Skill(new File("examples/skills/smalltalk")));
+        agent.getSkillManager().addSkill(new Skill(getNLU(), 1));
+
+        agent.getTrainingManager().trainEntities();
     }
 
     @After
@@ -62,5 +66,9 @@ public class AgentTest {
             System.out.print(String.format("%s:%s ", parameter.getKey(), parameter.getValue()));
         }
         System.out.println();
+    }
+
+    public OpenNLU getNLU() {
+        return openNLU;
     }
 }

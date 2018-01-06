@@ -1,7 +1,6 @@
 package org.opennlu.agent.session;
 
 import org.opennlu.agent.Agent;
-import org.opennlu.agent.AgentResponse;
 
 /**
  * Created by René Preuß on 8/31/2017.

@@ -4,15 +4,15 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import opennlp.tools.namefind.*;
-import opennlp.tools.util.*;
-import opennlp.tools.util.featuregen.AdaptiveFeatureGenerator;
+import opennlp.tools.util.InputStreamFactory;
+import opennlp.tools.util.ObjectStream;
+import opennlp.tools.util.PlainTextByLineStream;
+import opennlp.tools.util.TrainingParameters;
 import org.opennlu.util.StringsInputStream;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by René Preuß on 6/8/2017.

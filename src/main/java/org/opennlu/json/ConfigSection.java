@@ -16,6 +16,10 @@ public class ConfigSection {
 
     private final JsonObject jsonObject;
 
+    public ConfigSection() {
+        this.jsonObject = new JsonObject();
+    }
+
     public ConfigSection(JsonObject jsonObject) {
         this.jsonObject = jsonObject;
     }
@@ -100,6 +104,18 @@ public class ConfigSection {
         jsonObject.add(memberName, gson.toJsonTree(strings, stringListType));
     }
 
+    public void set(String memberName, ConfigSection config) {
+        jsonObject.add(memberName, config.getJsonObject());
+    }
+
+    public void setConfigSectionList(String memberName, List<ConfigSection> configList) {
+        JsonArray jsonArray = new JsonArray();
+        for (ConfigSection config : configList) {
+            jsonArray.add(config.getJsonObject());
+        }
+        jsonObject.add(memberName, jsonArray);
+    }
+
     public void setIfNull(String memberName, String s) {
         if(!has(memberName))
             jsonObject.addProperty(memberName, s);
@@ -126,5 +142,13 @@ public class ConfigSection {
 
     public JsonArray getJsonArray(String memberName) {
         return jsonObject.getAsJsonArray(memberName);
+    }
+
+    public JsonObject getJsonObject(String memberName) {
+        return jsonObject.getAsJsonObject(memberName);
+    }
+
+    JsonObject getJsonObject() {
+        return jsonObject;
     }
 }

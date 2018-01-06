@@ -18,13 +18,6 @@ public class Parameter {
         this.fallbackStrings = fallbackStrings;
     }
 
-    public Parameter(String name, boolean required, Entity entity) {
-        this.name = name;
-        this.required = required;
-        this.entity = entity;
-        this.fallbackStrings = new String[] { "Please send a value for " + name };
-    }
-
     public Entity getEntity() {
         return entity;
     }

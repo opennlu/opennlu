@@ -1,6 +1,7 @@
 package tests.nlu;
 
 import org.junit.Test;
+import org.opennlu.OpenNLU;
 import org.opennlu.agent.Agent;
 import org.opennlu.agent.AgentResponse;
 import org.opennlu.agent.context.Context;
@@ -30,14 +31,14 @@ public class BasicTests extends AgentTest {
 
         printSession("Current Session: ", session.getInputContext());
 
-        AgentResponse response = session.parse("I'd like to call you Kaede");
+        AgentResponse response = session.parse("Ich möchte dich Kaede nennen");
 
-        assertEquals("I'd like to call you Kaede", response.getMessage());
+        assertEquals("Ich möchte dich Kaede nennen", response.getMessage());
 
         assertEquals(1, response.getEntityValues().size());
-        assertEquals("Kaede", response.getEntityValues().get("@agent-name"));
-        assertEquals("agent.name.change", response.getIntent().getName());
-        assertEquals("My name is now Kaede", response.getFulfillment().getResponse());
+        assertEquals("Kaede", response.getEntityValues().get("@name"));
+        assertEquals("agent.name.set", response.getIntent().getName());
+        assertEquals("Mein Name ist jetzt Kaede.", response.getFulfillment().getResponse());
 
         printSession("Recalculated Session: ", response.getContext());
     }
@@ -93,10 +94,11 @@ public class BasicTests extends AgentTest {
     }
 
     public static void main(String[] args) throws Exception {
-        Agent agent = new Agent(new File("examples/agents/example"));
+        OpenNLU openNLU = new OpenNLU();
+        Agent agent = new Agent(openNLU, 1);
 
         // Add smalltalk skills
-        agent.getSkillManager().addSkill(new Skill(new File("examples/skills/smalltalk")));
+        agent.getSkillManager().addSkill(new Skill(openNLU, 1));
 
         agent.getTrainingManager().trainEntities();
 

@@ -1,15 +1,11 @@
 package org.opennlu.agent.intent;
 
 import org.opennlu.agent.Agent;
-import org.opennlu.agent.AgentResponse;
 import org.opennlu.agent.context.Context;
 import org.opennlu.agent.entity.Entity;
+import org.opennlu.jdbi.mapper.IntentMapper;
 import org.opennlu.json.ConfigSection;
-import org.opennlu.json.JsonConfig;
-import sun.security.krb5.Config;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +43,12 @@ public class IntentManager {
         return null;
     }
 
-    public Intent registerIntent(JsonConfig intentConfiguration) throws Exception {
+    public Intent registerIntent(ConfigSection intentConfiguration) throws Exception {
+
+        int intentVersion = intentConfiguration.has("schema") ?
+                intentConfiguration.getInt("schema") :
+                1;
+
         if(!intentConfiguration.has("name")) {
             throw new Exception("The parameter 'name' is missing.");
         } else if(!intentConfiguration.has("user_says")) {
@@ -90,8 +91,18 @@ public class IntentManager {
 
                 Intent intent = new Intent(
                         intentName,
-                        contextSection.has("input_contexts")?Context.fromJsonArray(contextSection.getJsonArray("input_contexts")):new ArrayList<>(),
-                        contextSection.has("output_contexts")?Context.fromJsonArray(contextSection.getJsonArray("output_contexts")):new ArrayList<>(),
+                        contextSection.has("input_contexts") ?
+                            (
+                                    intentVersion == IntentMapper.INTENT_SCHEMA_VERSION ?
+                                            Context.fromJson2Array(contextSection.getJsonArray("input_contexts")) :
+                                            Context.fromJsonArray(contextSection.getJsonArray("input_contexts"))
+                            ) : new ArrayList<>(),
+                        contextSection.has("output_contexts")?
+                            (
+                                    intentVersion == IntentMapper.INTENT_SCHEMA_VERSION ?
+                                            Context.fromJson2Array(contextSection.getJsonArray("output_contexts")) :
+                                            Context.fromJsonArray(contextSection.getJsonArray("output_contexts"))
+                            ) :new ArrayList<>(),
                         intentConfiguration.getList("user_says"),
                         intentConfiguration.getString("action"),
                         parameterList,

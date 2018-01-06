@@ -5,12 +5,15 @@ import com.google.gson.JsonObject;
 import opennlp.tools.tokenize.WhitespaceTokenizer;
 import opennlp.tools.util.Span;
 import org.opennlu.agent.context.Context;
-import org.opennlu.agent.fulfillment.ParameterFulfillment;
 import org.opennlu.agent.fulfillment.Fulfillment;
+import org.opennlu.agent.fulfillment.ParameterFulfillment;
 import org.opennlu.agent.intent.Intent;
 import org.opennlu.agent.intent.Parameter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by René Preuß on 6/2/2017.
@@ -34,7 +37,6 @@ public class AgentResponse {
             if(inputParameters.containsKey(parameter.getName())) {
                 entityValues.put(parameter.getEntity().getName(), inputParameters.get(parameter.getName()));
             } else {
-                System.out.println(parameter.getEntity().getTokenNameFinder());
                 Span[] spans = parameter.getEntity().getTokenNameFinder().find(tokens);
                 String[] names = Span.spansToStrings(spans, tokens);
                 String value = String.join(" ", names);

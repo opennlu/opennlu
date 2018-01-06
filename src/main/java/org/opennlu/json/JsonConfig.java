@@ -11,7 +11,7 @@ import java.io.*;
  */
 public class JsonConfig extends ConfigSection {
 
-    private JsonConfig(JsonObject jsonObject) throws FileNotFoundException {
+    private JsonConfig(JsonObject jsonObject) {
         super(jsonObject);
     }
 

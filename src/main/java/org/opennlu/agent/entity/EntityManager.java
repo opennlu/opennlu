@@ -1,9 +1,8 @@
 package org.opennlu.agent.entity;
 
 import org.opennlu.agent.Agent;
-import org.opennlu.json.JsonConfig;
+import org.opennlu.json.ConfigSection;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -31,7 +30,7 @@ public class EntityManager {
         return null;
     }
 
-    public Entity registerEntity(JsonConfig entityConfiguration) throws Exception {
+    public Entity registerEntity(ConfigSection entityConfiguration) throws Exception {
         if(!entityConfiguration.has("name")) {
             throw new Exception("The parameter 'name' is missing.");
         } else if(!entityConfiguration.has("type")) {
