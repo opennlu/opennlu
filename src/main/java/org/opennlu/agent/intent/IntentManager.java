@@ -140,4 +140,10 @@ public class IntentManager {
 
         return selectedIntents;
     }
+
+    public void forgetIntents() {
+        for(Intent intent : intents) {
+            unregisterIntent(intent);
+        }
+    }
 }

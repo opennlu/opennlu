@@ -33,6 +33,7 @@ public class BasicTests extends AgentTest {
 
         AgentResponse response = session.parse("Ich möchte dich Kaede nennen");
 
+        System.out.println(response.toJson().toString());
         assertEquals("Ich möchte dich Kaede nennen", response.getMessage());
 
         assertEquals(1, response.getEntityValues().size());

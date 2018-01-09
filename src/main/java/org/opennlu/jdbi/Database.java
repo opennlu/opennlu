@@ -5,6 +5,7 @@ import org.opennlu.OpenNLU;
 import org.opennlu.agent.Agent;
 import org.opennlu.agent.AgentResponse;
 import org.opennlu.agent.session.Session;
+import org.opennlu.agent.skill.Skill;
 import org.opennlu.jdbi.mapper.*;
 import org.opennlu.json.ConfigSection;
 import org.skife.jdbi.v2.DBI;
@@ -20,9 +21,9 @@ public class Database {
     public Database(OpenNLU openNLU) {
         this.openNLU = openNLU;
         MysqlConnectionPoolDataSource dbPool = new MysqlConnectionPoolDataSource();
-        dbPool.setUrl("jdbc:mysql://kaedeai.c2.to/wh2_kaedeai?connectTimeout=0&autoReconnect=true");
-        dbPool.setUser("wh2_kaedeai");
-        dbPool.setPassword("Kennwort1");
+        dbPool.setUrl("jdbc:mysql://localhost/kaede2?connectTimeout=0&autoReconnect=true");
+        dbPool.setUser("root");
+        dbPool.setPassword("");
         handle = new DBI(dbPool).open();
     }
 
@@ -110,5 +111,14 @@ public class Database {
                     .bind("agent_id", agent.getId())
                     .execute();
         }
+    }
+
+    public List<Skill> getAgentSkills(int agentId) {
+        return handle.createQuery("SELECT ai_skills.* FROM ai_agent_skills" +
+                " JOIN ai_skills ON (ai_skills.id = ai_agent_skills.ai_skill_id)" +
+                " WHERE ai_agent_skills.ai_agent_id = :identifier;")
+                .bind("identifier", agentId)
+                .map(new SkillMapper(openNLU))
+                .list();
     }
 }

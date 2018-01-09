@@ -2,8 +2,10 @@ package org.opennlu.agent;
 
 import org.opennlu.OpenNLU;
 import org.opennlu.agent.entity.EntityManager;
+import org.opennlu.agent.intent.Intent;
 import org.opennlu.agent.intent.IntentManager;
 import org.opennlu.agent.session.SessionManager;
+import org.opennlu.agent.skill.Skill;
 import org.opennlu.agent.skill.SkillManager;
 import org.opennlu.agent.training.TrainingManager;
 import org.opennlu.json.ConfigSection;
@@ -32,8 +34,7 @@ public class Agent {
         this.skillManager = new SkillManager(this);
         this.sessionManager = new SessionManager(this);
 
-        // TODO add primary skills?
-        //getSkillManager().addSkill(new Skill("example"));
+        reloadSkills();
     }
 
     public int getId() {
@@ -70,5 +71,14 @@ public class Agent {
 
     public OpenNLU getNLU() {
         return openNLU;
+    }
+
+    public void reloadSkills() throws Exception {
+        getSkillManager().forgetSkills();
+
+        // register skills
+        for (Skill skill : openNLU.getDatabase().getAgentSkills(getId())) {
+            getSkillManager().addSkill(skill);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package org.opennlu.agent.session;
 
+import com.google.gson.JsonObject;
 import org.opennlu.agent.Agent;
 import org.opennlu.agent.AgentResponse;
 import org.opennlu.agent.context.Context;
@@ -22,6 +23,13 @@ public class Session {
         this.sessionManager = sessionManager;
         this.agent = agent;
         this.id = agent.getNLU().getDatabase().createSession(agent);
+    }
+
+    public Session(SessionManager sessionManager, Agent agent, int id, List<Context> inputContext) {
+        this.sessionManager = sessionManager;
+        this.agent = agent;
+        this.id = id;
+        this.inputContext = inputContext;
     }
 
     public int getId() {
@@ -47,5 +55,11 @@ public class Session {
 
     public Map<String, String> getInputParameters() {
         return inputParameters;
+    }
+
+    public JsonObject toJson() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("id", id);
+        return jsonObject;
     }
 }

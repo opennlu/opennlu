@@ -59,4 +59,8 @@ public class EntityManager {
         entities.add(entity);
         return entity;
     }
+
+    public void unregisterEntity(Entity entity) {
+        entities.remove(entity);
+    }
 }

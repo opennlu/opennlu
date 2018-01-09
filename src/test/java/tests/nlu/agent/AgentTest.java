@@ -30,8 +30,6 @@ public class AgentTest {
     private void leanSkills() throws Exception {
         // Add smalltalk skills
         agent.getSkillManager().addSkill(new Skill(getNLU(), 1));
-
-        agent.getTrainingManager().trainEntities();
     }
 
     @After
