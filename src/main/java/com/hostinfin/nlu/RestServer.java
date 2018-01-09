@@ -10,6 +10,7 @@ import com.hostinfin.nlu.controller.AgentController;
 import com.hostinfin.nlu.controller.SessionController;
 import org.opennlu.OpenNLU;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import static spark.Spark.*;
@@ -18,15 +19,16 @@ import static spark.Spark.*;
  * Created by René Preuß on 1/8/2018.
  */
 public class RestServer {
-    public static void main(String[] args) throws UnsupportedEncodingException {
+    public static void main(String[] args) throws IOException {
+        // OpenNLU
+        OpenNLU openNLU = new OpenNLU();
         Gson gson = new Gson();
-        Algorithm algorithm = Algorithm.HMAC256("qwertyuiopasdfghjklzxcvbnm123456");
+        Algorithm algorithm = Algorithm.HMAC256(openNLU.getConfig().getConfigSection("JWT").getString("Key"));
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer("accounts.preuss.io")
                 .build();
 
-        // OpenNLU
-        OpenNLU openNLU = new OpenNLU();
+
         SessionController sessionController = new SessionController(openNLU);
         AgentController agentController = new AgentController(openNLU);
 

@@ -89,14 +89,11 @@ public class TrainingManager {
         double fulfilmentScore = 0;
 
         for(Context context : inputContexts) {
-            if(context.getName().startsWith("d-i-")) {
-                fulfilmentIntent = agent.getIntentManager().findIntent(context.getName().substring(4));
-            } else if(context.getName().startsWith("d-p-")) {
-                inputParameters.put(context.getName().substring(4), message);
-            } else if(context.getName().startsWith("d-m-")) {
-                fulfilmentMessage = context.getName().substring(4);
-            } else if(context.getName().startsWith("d-s-")) {
-                fulfilmentScore = Double.parseDouble(context.getName().substring(4));
+            if(context.getName().equals("dialog")) {
+                fulfilmentIntent = agent.getIntentManager().findIntent(context.getValue().get("intent").getAsString());
+                inputParameters.put(context.getValue().get("parameter").getAsString(), message);
+                fulfilmentMessage = context.getValue().get("message").getAsString();
+                fulfilmentScore = context.getValue().get("score").getAsDouble();
             }
         }
 

@@ -3,6 +3,7 @@ package org.opennlu.agent.context;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,20 +13,33 @@ import java.util.List;
  */
 public class Context {
     private final String name;
+    private final JsonObject value;
     private int ttl;
 
     public Context(String name) {
         this.name = name;
+        this.value = new JsonObject();
         this.ttl = 0;
     }
 
     public Context(String name, int ttl) {
         this.name = name;
+        this.value = new JsonObject();
+        this.ttl = ttl;
+    }
+
+    public Context(String name, JsonObject value, int ttl) {
+        this.name = name;
+        this.value = value;
         this.ttl = ttl;
     }
 
     public String getName() {
         return name;
+    }
+
+    public JsonObject getValue() {
+        return value;
     }
 
     public boolean decreaseTimeToLive() {
@@ -53,7 +67,9 @@ public class Context {
         List<Context> contextList = new ArrayList<>();
         for (JsonElement jsonElement : jsonArray) {
             JsonObject jsonContextObject = jsonElement.getAsJsonObject();
-            if(jsonContextObject.has("ttl")) {
+            if(jsonContextObject.has("value")) {
+                contextList.add(new Context(jsonContextObject.get("name").getAsString(), jsonContextObject.get("value").getAsJsonObject(), jsonContextObject.get("ttl").getAsInt()));
+            } else if(jsonContextObject.has("ttl")) {
                 contextList.add(new Context(jsonContextObject.get("name").getAsString(), jsonContextObject.get("ttl").getAsInt()));
             } else {
                 contextList.add(new Context(jsonContextObject.get("name").getAsString()));
@@ -61,5 +77,13 @@ public class Context {
         }
 
         return contextList;
+    }
+
+    public JsonObject toJson() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("name", name);
+        jsonObject.add("value", value);
+        jsonObject.addProperty("ttl", ttl);
+        return jsonObject;
     }
 }

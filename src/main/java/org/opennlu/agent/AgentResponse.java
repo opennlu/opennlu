@@ -48,10 +48,12 @@ public class AgentResponse {
                     entityValues.put(parameter.getEntity().getName(), value);
                 } else {
                     if(parameter.isRequired() && missedParameter == null) {
-                        outputContexts.add(new Context(String.format("d-i-%s", intent.getName()), 1));
-                        outputContexts.add(new Context(String.format("d-p-%s", parameter.getName()), 1));
-                        outputContexts.add(new Context(String.format("d-m-%s", message), 1));
-                        outputContexts.add(new Context(String.format("d-s-%s", score), 1));
+                        JsonObject dialogObject = new JsonObject();
+                        dialogObject.addProperty("intent", intent.getName());
+                        dialogObject.addProperty("parameter", parameter.getName());
+                        dialogObject.addProperty("message", message);
+                        dialogObject.addProperty("score", score);
+                        outputContexts.add(new Context("dialog", dialogObject, 1));
                         missedParameter = parameter;
                     }
                 }
@@ -111,11 +113,8 @@ public class AgentResponse {
         jsonObject.addProperty("intent", getIntent().getName());
         jsonObject.add("fulfillment", getFulfillment().toJson());
         JsonArray jsonContextArray = new JsonArray();
-        for(Context property : getContext()) {
-            JsonObject jsonPropertyObject = new JsonObject();
-            jsonPropertyObject.addProperty("name", property.getName());
-            jsonPropertyObject.addProperty("ttl", property.getTimeToLive());
-            jsonContextArray.add(jsonPropertyObject);
+        for(Context context : getContext()) {
+            jsonContextArray.add(context.toJson());
         }
         jsonObject.add("context", jsonContextArray);
         JsonArray jsonPropertyArray = new JsonArray();

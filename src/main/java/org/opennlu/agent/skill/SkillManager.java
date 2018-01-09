@@ -25,18 +25,22 @@ public class SkillManager {
     }
 
     public Skill addSkill(Skill skill) throws Exception {
+        System.out.println(String.format("Lean new skill %s for %s", skill, agent.getId()));
         List<Entity> installedEntities = new ArrayList<>();
         for(ConfigSection entity : skill.getEntities()) {
-            installedEntities.add(agent.getEntityManager().registerEntity(entity));
+            Entity newEnt = agent.getEntityManager().registerEntity(entity);
+            System.out.println("NewEnt: " + newEnt);
+            installedEntities.add(newEnt);
         }
         installedSkillEntities.put(skill, installedEntities);
-        agent.getTrainingManager().trainEntities();
 
         List<Intent> installedIntents = new ArrayList<>();
         for(ConfigSection intent : skill.getIntents()) {
             installedIntents.add(agent.getIntentManager().registerIntent(intent));
         }
         installedSkillIntents.put(skill, installedIntents);
+
+        agent.getTrainingManager().trainEntities();
 
         skills.add(skill);
         return skill;
@@ -46,11 +50,12 @@ public class SkillManager {
         for(Entity entity : installedSkillEntities.get(skill)) {
             agent.getEntityManager().unregisterEntity(entity);
         }
-        agent.getTrainingManager().trainEntities();
 
         for(Intent intent : installedSkillIntents.get(skill)) {
             agent.getIntentManager().unregisterIntent(intent);
         }
+
+        agent.getTrainingManager().trainEntities();
     }
 
     public List<Skill> getSkills() {

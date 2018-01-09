@@ -21,9 +21,9 @@ public class Database {
     public Database(OpenNLU openNLU) {
         this.openNLU = openNLU;
         MysqlConnectionPoolDataSource dbPool = new MysqlConnectionPoolDataSource();
-        dbPool.setUrl("jdbc:mysql://localhost/kaede2?connectTimeout=0&autoReconnect=true");
-        dbPool.setUser("root");
-        dbPool.setPassword("");
+        dbPool.setUrl(openNLU.getConfig().getConfigSection("SQL").getString("ConnectionString"));
+        dbPool.setUser(openNLU.getConfig().getConfigSection("SQL").getString("Username"));
+        dbPool.setPassword(openNLU.getConfig().getConfigSection("SQL").getString("Password"));
         handle = new DBI(dbPool).open();
     }
 
