@@ -48,10 +48,10 @@ public class AgentResponse {
                     entityValues.put(parameter.getEntity().getName(), value);
                 } else {
                     if(parameter.isRequired() && missedParameter == null) {
-                        outputContexts.add(new Context(String.format("fulfilment-%s", intent.getName()), 1));
-                        outputContexts.add(new Context(String.format("parameter-%s", parameter.getName()), 1));
-                        outputContexts.add(new Context(String.format("message-%s", message), 1));
-                        outputContexts.add(new Context(String.format("score-%s", score), 1));
+                        outputContexts.add(new Context(String.format("d-i-%s", intent.getName()), 1));
+                        outputContexts.add(new Context(String.format("d-p-%s", parameter.getName()), 1));
+                        outputContexts.add(new Context(String.format("d-m-%s", message), 1));
+                        outputContexts.add(new Context(String.format("d-s-%s", score), 1));
                         missedParameter = parameter;
                     }
                 }
