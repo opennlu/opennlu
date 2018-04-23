@@ -16,7 +16,7 @@ OpenNLU is used to build next-generation bots and assistants that engage in huma
 
 ## Setup
 
-A tutorial for the installation & configuration can be found in our [Wiki](https://github.com/OpenNLU/OpenNLU/wiki)
+A tutorial for the installation & configuration can be found in our [Wiki](https://github.com/GhostZero/OpenNLU/wiki)
 
 ## How to contribute
 
