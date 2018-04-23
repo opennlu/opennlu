@@ -8,6 +8,16 @@ OpenNLU is used to build next-generation bots and assistants that engage in huma
 
 ![OpenNLU Overview](docs/assets/images/OpenNLU.png)
 
+## Screenshots
+
+> Here are some screenshots of the web interface, based on Laravel, Vue.js & Bootstrap. The web interface is not in this repository and will be published later.
+
+![OpenNLU Web - Home](docs/assets/images/screenshot-opennlu-index.png)
+
+![OpenNLU Web - Agent Information](docs/assets/images/screenshot-opennlu-agent.png)
+
+![OpenNLU Web - Intent Editor](docs/assets/images/screenshot-opennlu-intent.png)
+
 ## Contents
 
 - [Setup](#setup) 
