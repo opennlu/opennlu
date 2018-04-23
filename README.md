@@ -24,4 +24,4 @@ We are very happy to receive and merge your contributions. There is some more in
 
 ## License
 
-All Rights Reserved. [Copy of the license](LICENSE).
+MIT. [Copy of the license](LICENSE).
