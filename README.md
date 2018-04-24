@@ -1,3 +1,7 @@
+[![License: MIT](https://img.shields.io/github/license/GhostZero/OpenNLU.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://img.shields.io/travis/GhostZero/OpenNLU/master.svg)](https://travis-ci.org/GhostZero/OpenNLU)
+[![Discord](https://img.shields.io/discord/373468864098336768.svg)](https://ghostzero.me/discord)
+
 # OpenNLU - Open Source Conversational AI
 
 > There is currently no release candidate available.
@@ -8,6 +12,18 @@ OpenNLU is used to build next-generation bots and assistants that engage in huma
 
 ![OpenNLU Overview](docs/assets/images/OpenNLU.png)
 
+# Contents
+
+- [OpenNLU Sponsors](#opennlu-sponsors) 
+- [Screenshots](#screenshots) 
+- [Setup](#setup) 
+- [How to contribute](#how-to-contribute)
+- [License](#license)
+
+## OpenNLU Sponsors
+
+If you are interested in becoming a sponsor, please visit the OpenNLU [PayPal.Me page](https://www.paypal.me/preussio).
+
 ## Screenshots
 
 > Here are some screenshots of the web interface, based on Laravel, Vue.js & Bootstrap. The web interface is not in this repository and will be published later.
@@ -17,12 +33,6 @@ OpenNLU is used to build next-generation bots and assistants that engage in huma
 ![OpenNLU Web - Agent Information](docs/assets/images/screenshot-opennlu-agent.png)
 
 ![OpenNLU Web - Intent Editor](docs/assets/images/screenshot-opennlu-intent.png)
-
-## Contents
-
-- [Setup](#setup) 
-- [How to contribute](#how-to-contribute)
-- [License](#license)
 
 ## Setup
 
