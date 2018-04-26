@@ -16,7 +16,8 @@ OpenNLU is used to build next-generation bots and assistants that engage in huma
 
 - [OpenNLU Sponsors](#opennlu-sponsors) 
 - [Screenshots](#screenshots) 
-- [Setup](#setup) 
+- [Setup](#setup)
+- [Awesome OpenNLU](#awesome-opennlu)
 - [How to contribute](#how-to-contribute)
 - [License](#license)
 
@@ -37,6 +38,28 @@ If you are interested in becoming a sponsor, please visit the OpenNLU [PayPal.Me
 ## Setup
 
 A tutorial for the installation & configuration can be found in our [Wiki](https://github.com/GhostZero/OpenNLU/wiki)
+
+## Awesome OpenNLU
+
+A curated list of libraries, tools, and integrations for OpenNLU.
+
+Projects formatted in **bold** are official OpenNLU projects.
+
+Want to have your project listed? Submit a Pull Request!
+
+**Please note that while we try to only include projects in this list which are
+functional and of good quality, we cannot provide any guarantee that they actually
+work, are complete, nor that they do not cause any harm to your system or your account.**
+
+### Libraries
+
+#### PHP
+
+* **[NLU-PHP-Client](https://git.preuss.io/KaedeAI/NLU-PHP-Client) — Official library for PHP**
+
+#### Java
+
+* **[NLU-Java-Client](https://git.preuss.io/KaedeAI/NLU-Java-Client) — Official library for Java**
 
 ## How to contribute
 
