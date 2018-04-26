@@ -51,6 +51,10 @@ Want to have your project listed? Submit a Pull Request!
 functional and of good quality, we cannot provide any guarantee that they actually
 work, are complete, nor that they do not cause any harm to your system or your account.**
 
+### Tools
+
+* **[OpenNLU-Dashboard](https://github.com/GhostZero/OpenNLU-Dashboard) — Official web agent, intent & entity editor**
+
 ### Libraries
 
 #### PHP
