@@ -1,6 +1,6 @@
+[![Discord](https://discordapp.com/api/guilds/373468864098336768/embed.png)](https://ghostzero.me/discord)
 [![License: MIT](https://img.shields.io/github/license/GhostZero/OpenNLU.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/travis/GhostZero/OpenNLU/master.svg)](https://travis-ci.org/GhostZero/OpenNLU)
-[![Discord](https://img.shields.io/discord/373468864098336768.svg)](https://ghostzero.me/discord)
 
 # OpenNLU - Open Source Conversational AI
 
