@@ -13,10 +13,14 @@ public class Skill {
 
     private final List<ConfigSection> entities = new ArrayList<>();
     private final List<ConfigSection> intents = new ArrayList<>();
+    private final int id;
+    private final String name;
 
-    public Skill(OpenNLU openNLU, int skillId) {
-        entities.addAll(openNLU.getDatabase().getEntityConfigsBySkill(skillId));
-        intents.addAll(openNLU.getDatabase().getIntentConfigs(skillId));
+    public Skill(OpenNLU openNLU, int id, String name) {
+        this.id = id;
+        this.name = name;
+        entities.addAll(openNLU.getDatabase().getEntityConfigsBySkill(id));
+        intents.addAll(openNLU.getDatabase().getIntentConfigs(id));
     }
 
     public List<ConfigSection> getEntities() {
@@ -25,5 +29,13 @@ public class Skill {
 
     public List<ConfigSection> getIntents() {
         return intents;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 }

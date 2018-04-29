@@ -8,6 +8,7 @@ import org.opennlu.agent.AgentResponse;
 import org.opennlu.agent.context.Context;
 import org.opennlu.agent.skill.Skill;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,14 +23,10 @@ public class AgentTest {
     @Before
     public final void setUp() throws Exception {
         System.out.println("AgentTest.setUp");
-        openNLU = new OpenNLU();
-        agent = new Agent(getNLU(), 1);
-        leanSkills();
-    }
 
-    private void leanSkills() throws Exception {
-        // Add smalltalk skills
-        agent.getSkillManager().addSkill(new Skill(getNLU(), 1));
+
+        openNLU = new OpenNLU(OpenNLU.getLocalConfig(new File("config.json")));
+        agent = new Agent(getNLU(), 2);
     }
 
     @After

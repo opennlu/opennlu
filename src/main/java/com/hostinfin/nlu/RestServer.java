@@ -10,8 +10,8 @@ import com.hostinfin.nlu.controller.AgentController;
 import com.hostinfin.nlu.controller.SessionController;
 import org.opennlu.OpenNLU;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import static spark.Spark.*;
 
@@ -21,11 +21,11 @@ import static spark.Spark.*;
 public class RestServer {
     public static void main(String[] args) throws IOException {
         // OpenNLU
-        OpenNLU openNLU = new OpenNLU();
+        OpenNLU openNLU = new OpenNLU(OpenNLU.getLocalConfig(new File("config.json")));
         Gson gson = new Gson();
         Algorithm algorithm = Algorithm.HMAC256(openNLU.getConfig().getConfigSection("JWT").getString("Key"));
         JWTVerifier verifier = JWT.require(algorithm)
-                .withIssuer("accounts.preuss.io")
+                .withIssuer(openNLU.getConfig().getConfigSection("JWT").getString("Issuer"))
                 .build();
 
 
@@ -64,7 +64,7 @@ public class RestServer {
 
         notFound((req, res) -> {
             res.type("application/json");
-            return "{\"message\":\"Custom 404\"}";
+            return "{\"message\":\"404 Not Found\"}";
         });
     }
 }

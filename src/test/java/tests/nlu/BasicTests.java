@@ -44,6 +44,16 @@ public class BasicTests extends AgentTest {
         printSession("Recalculated Session: ", response.getContext());
     }
 
+
+    @Test
+    public void testPing() throws Exception {
+        Session session = getAgent().getSessionManager().createSession();
+
+        AgentResponse response = session.parse("ping");
+
+        assertEquals("pong", response.getFulfillment().getResponse());
+    }
+
     @Test
     public void testContexts() throws Exception {
         Session session;
@@ -95,11 +105,11 @@ public class BasicTests extends AgentTest {
     }
 
     public static void main(String[] args) throws Exception {
-        OpenNLU openNLU = new OpenNLU();
+        OpenNLU openNLU = new OpenNLU(OpenNLU.getLocalConfig(new File("config.json")));
         Agent agent = new Agent(openNLU, 1);
 
-        // Add smalltalk skills
-        agent.getSkillManager().addSkill(new Skill(openNLU, 1));
+        // Add system skills
+        agent.getSkillManager().addSkill(new Skill(openNLU, 1, "System"));
 
         agent.getTrainingManager().trainEntities();
 

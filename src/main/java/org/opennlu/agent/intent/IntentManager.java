@@ -49,8 +49,6 @@ public class IntentManager {
             throw new Exception("The parameter 'name' is missing.");
         } else if(!intentConfiguration.has("user_says")) {
             throw new Exception("The parameter 'user_says' is missing.");
-        } else if(!intentConfiguration.has("action")) {
-            throw new Exception("The parameter 'action' is missing.");
         } else if(!intentConfiguration.has("response")) {
             throw new Exception("The parameter 'response' is missing.");
         } else if(!intentConfiguration.getConfigSection("response").has("text_response")) {
@@ -95,7 +93,9 @@ public class IntentManager {
                                 Context.fromJsonArray(contextSection.getJsonArray("output_contexts")) :
                                 new ArrayList<>(),
                         intentConfiguration.getList("user_says"),
-                        intentConfiguration.getString("action"),
+                        intentConfiguration.has("action") ?
+                                intentConfiguration.getString("action") :
+                                null,
                         parameterList,
                         intentConfiguration.getConfigSection("response").getList("text_response")
                 );

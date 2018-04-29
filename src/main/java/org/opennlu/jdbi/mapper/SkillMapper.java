@@ -18,6 +18,6 @@ public class SkillMapper implements ResultSetMapper<Skill> {
 
     @Override
     public Skill map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
-        return new Skill(openNLU, resultSet.getInt("id"));
+        return new Skill(openNLU, resultSet.getInt("id"), resultSet.getString("name"));
     }
 }

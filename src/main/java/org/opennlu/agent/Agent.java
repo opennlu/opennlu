@@ -78,6 +78,7 @@ public class Agent {
 
         // register skills
         for (Skill skill : openNLU.getDatabase().getAgentSkills(getId())) {
+            System.out.println(String.format("Found Skill: %s (%s)", skill.getName(), skill.getId()));
             getSkillManager().addSkill(skill);
         }
     }
