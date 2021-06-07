@@ -10,7 +10,7 @@ import static spark.Spark.halt;
  */
 public class Controller {
     public void canAccessAgent(Request req, Response res) throws Exception {
-        if(!req.params().containsKey(":agent") || !req.params(":agent").equals(req.attribute("agent"))) {
+        if (!req.params().containsKey(":agent") || !req.params(":agent").equals(req.attribute("agent"))) {
             throw halt(403, "You have no permissions to access this agent!");
         }
     }

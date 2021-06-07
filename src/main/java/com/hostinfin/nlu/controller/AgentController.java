@@ -1,13 +1,9 @@
 package com.hostinfin.nlu.controller;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.opennlu.OpenNLU;
-import org.opennlu.agent.context.Context;
 import spark.Request;
 import spark.Response;
-
-import java.util.ArrayList;
 
 /**
  * Created by René Preuß on 1/8/2018.

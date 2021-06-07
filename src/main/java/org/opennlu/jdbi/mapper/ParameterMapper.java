@@ -21,7 +21,7 @@ public class ParameterMapper implements ResultSetMapper<ConfigSection> {
         ConfigSection config = new ConfigSection();
         config.set("name", resultSet.getString("name"));
         config.set("required", resultSet.getBoolean("required"));
-        config.set("entity", openNLU.getDatabase().getEntityConfigById(resultSet.getString("ai_entity_id")).getString("name"));
+        config.set("entity", openNLU.getDatabase().getEntityConfigById(resultSet.getString("entity_id")).getString("name"));
         config.set("fallback", openNLU.getDatabase().getIntentParameterFallbacks(resultSet.getString("id")));
         return config;
     }

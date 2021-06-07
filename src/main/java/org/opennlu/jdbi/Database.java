@@ -28,82 +28,82 @@ public class Database {
     }
 
     public ConfigSection getAgentConfig(int id) {
-        return handle.createQuery("SELECT * FROM `ai_agents` WHERE `id` = :identifier;")
+        return handle.createQuery("SELECT * FROM `agents` WHERE `id` = :identifier;")
                 .bind("identifier", id)
                 .map(new AgentMapper())
                 .first();
     }
 
     public List<ConfigSection> getEntityConfigsBySkill(int skillId) {
-        return handle.createQuery("SELECT * FROM `ai_entities` WHERE `ai_skill_id` = :identifier;")
+        return handle.createQuery("SELECT * FROM `entities` WHERE `skill_id` = :identifier;")
                 .bind("identifier", skillId)
                 .map(new EntityMapper())
                 .list();
     }
 
     public List<ConfigSection> getIntentConfigs(int skillId) {
-        return handle.createQuery("SELECT * FROM `ai_intents` WHERE `ai_skill_id` = :identifier;")
+        return handle.createQuery("SELECT * FROM `intents` WHERE `skill_id` = :identifier;")
                 .bind("identifier", skillId)
                 .map(new IntentMapper(openNLU))
                 .list();
     }
 
     public List<String> getIntentUserSays(int intentId) {
-        return handle.createQuery("SELECT * FROM `ai_intent_user_says` WHERE `ai_intent_id` = :identifier;")
+        return handle.createQuery("SELECT * FROM `intent_user_says` WHERE `intent_id` = :identifier;")
                 .bind("identifier", intentId)
                 .map(new StringMapper("content"))
                 .list();
     }
 
     public List<ConfigSection> getIntentInputContexts(int intentId) {
-        return handle.createQuery("SELECT * FROM `ai_intent_input_contexts` WHERE `ai_intent_id` = :identifier;")
+        return handle.createQuery("SELECT * FROM `intent_input_contexts` WHERE `intent_id` = :identifier;")
                 .bind("identifier", intentId)
                 .map(new InputContextMapper())
                 .list();
     }
 
-    public List<ConfigSection> getIntentOutpurContexts(int intentId) {
-        return handle.createQuery("SELECT * FROM `ai_intent_output_contexts` WHERE `ai_intent_id` = :identifier;")
+    public List<ConfigSection> getIntentOutputContexts(int intentId) {
+        return handle.createQuery("SELECT * FROM `intent_output_contexts` WHERE `intent_id` = :identifier;")
                 .bind("identifier", intentId)
                 .map(new OutputContextMapper())
                 .list();
     }
 
     public List<String> getIntentTextResponses(int intentId) {
-        return handle.createQuery("SELECT * FROM `ai_intent_responses` WHERE `ai_intent_id` = :identifier;")
+        return handle.createQuery("SELECT * FROM `intent_responses` WHERE `intent_id` = :identifier;")
                 .bind("identifier", intentId)
                 .map(new StringMapper("content"))
                 .list();
     }
 
     public List<ConfigSection> getIntentParameterConfigs(int intentId) {
-        return handle.createQuery("SELECT * FROM `ai_intent_parameters` WHERE `ai_intent_id` = :identifier;")
+        return handle.createQuery("SELECT * FROM `intent_parameters` WHERE `intent_id` = :identifier;")
                 .bind("identifier", intentId)
                 .map(new ParameterMapper(openNLU))
                 .list();
     }
 
     public ConfigSection getEntityConfigById(String entityId) {
-        return handle.createQuery("SELECT * FROM `ai_entities` WHERE `id` = :identifier;")
+        return handle.createQuery("SELECT * FROM `entities` WHERE `id` = :identifier;")
                 .bind("identifier", entityId)
                 .map(new EntityMapper())
                 .first();
     }
 
     public List<String> getIntentParameterFallbacks(String intentId) {
-        return handle.createQuery("SELECT * FROM `ai_intent_parameter_fallbacks` WHERE `ai_intent_parameter_id` = :identifier;")
+        return handle.createQuery("SELECT * FROM `intent_parameter_fallbacks` WHERE `intent_parameter_id` = :identifier;")
                 .bind("identifier", intentId)
                 .map(new StringMapper("content"))
                 .list();
     }
 
     public int createSession(Agent agent) {
-        return handle.insert("INSERT INTO `ai_sessions` (ai_agent_id, created_at, updated_at) VALUES (?, NOW(), NOW());", agent.getId());
+        return handle.insert("INSERT INTO `sessions` (agent_id, created_at, updated_at) VALUES (?, NOW(), NOW());", agent.getId());
     }
 
     public void createQuery(Agent agent, Session session, AgentResponse response) {
-        if(response.getMessage().length() > 0) {
-            handle.createStatement("INSERT INTO `ai_queries` (query, exec_time, ai_intent_id, ai_session_id, ai_agent_id, created_at, updated_at) VALUES (:query, :exec_time, :intent_id, :session_id, :agent_id, NOW(), NOW());")
+        if (response.getMessage().length() > 0) {
+            handle.createStatement("INSERT INTO `queries` (query, exec_time, intent_id, session_id, agent_id, created_at, updated_at) VALUES (:query, :exec_time, :intent_id, :session_id, :agent_id, NOW(), NOW());")
                     .bind("query", response.getMessage())
                     .bind("exec_time", response.getExecutionTime())
                     .bind("intent_id", response.getIntent().getId())
@@ -114,9 +114,9 @@ public class Database {
     }
 
     public List<Skill> getAgentSkills(int agentId) {
-        return handle.createQuery("SELECT ai_skills.* FROM ai_agent_skills" +
-                " JOIN ai_skills ON (ai_skills.id = ai_agent_skills.ai_skill_id)" +
-                " WHERE ai_agent_skills.ai_agent_id = :identifier;")
+        return handle.createQuery("SELECT skills.* FROM agent_skills" +
+                " JOIN skills ON (skills.id = agent_skills.skill_id)" +
+                " WHERE agent_skills.agent_id = :identifier;")
                 .bind("identifier", agentId)
                 .map(new SkillMapper(openNLU))
                 .list();

@@ -17,10 +17,10 @@ public class Fulfillment {
     }
 
     public String getResponse() {
-        if(agentResponse.getIntent().getResponseStrings().size() > 0) {
+        if (agentResponse.getIntent().getResponseStrings().size() > 0) {
             String response = agentResponse.getIntent().getResponseStrings().get(new Random().nextInt(agentResponse.getIntent().getResponseStrings().size()));
-            for(Parameter property : agentResponse.getIntent().getParameters()) {
-                if(agentResponse.getEntityValues().containsKey(property.getEntity().getName())) {
+            for (Parameter property : agentResponse.getIntent().getParameters()) {
+                if (agentResponse.getEntityValues().containsKey(property.getEntity().getName())) {
                     response = response.replace("$" + property.getName(), agentResponse.getEntityValues().get(property.getEntity().getName()));
                 }
             }

@@ -25,9 +25,9 @@ public class IntentMapper implements ResultSetMapper<ConfigSection> {
         config.getConfigSection("contexts")
                 .setConfigSectionList("input_contexts", openNLU.getDatabase().getIntentInputContexts(resultSet.getInt("id")));
         config.getConfigSection("contexts")
-                .setConfigSectionList("output_contexts", openNLU.getDatabase().getIntentOutpurContexts(resultSet.getInt("id")));
+                .setConfigSectionList("output_contexts", openNLU.getDatabase().getIntentOutputContexts(resultSet.getInt("id")));
         config.set("user_says", openNLU.getDatabase().getIntentUserSays(resultSet.getInt("id")));
-        if(resultSet.getString("action") != null) {
+        if (resultSet.getString("action") != null) {
             config.set("action", resultSet.getString("action"));
         }
         config.setConfigSectionList("parameters", openNLU.getDatabase().getIntentParameterConfigs(resultSet.getInt("id")));

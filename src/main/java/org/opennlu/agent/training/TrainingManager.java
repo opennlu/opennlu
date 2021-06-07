@@ -36,8 +36,8 @@ public class TrainingManager {
 
     public void trainEntities() {
         // Train Entity
-        for(Entity entity : agent.getEntityManager().getEntities()) {
-            if(entity.getSamples().size() > 0) {
+        for (Entity entity : agent.getEntityManager().getEntities()) {
+            if (entity.getSamples().size() > 0) {
                 try {
                     entity.train(agent.getLanguage());
                 } catch (Exception e) {
@@ -55,13 +55,13 @@ public class TrainingManager {
         long startTime = System.nanoTime();
         AgentResponse fulfilmentResponse = handleFulfilment(startTime, message, inputContexts, inputParameters);
 
-        if(fulfilmentResponse != null) {
+        if (fulfilmentResponse != null) {
             return fulfilmentResponse;
         }
 
         DocumentCategorizerME categorizer = findCategorizer(inputContexts);
 
-        if(categorizer == null)
+        if (categorizer == null)
             return new AgentResponse(startTime, message, agent.getIntentManager().getFallbackIntent(), inputContexts, inputParameters, 0);
 
         double[] outcome = categorizer.categorize(message.toLowerCase());
@@ -69,15 +69,15 @@ public class TrainingManager {
         double avgScore = 0;
 
         String bestCategory = categorizer.getBestCategory(outcome);
-        for(int i=0;i<categorizer.getNumberOfCategories();i++){
-            if(categorizer.getCategory(i).equals(bestCategory))
+        for (int i = 0; i < categorizer.getNumberOfCategories(); i++) {
+            if (categorizer.getCategory(i).equals(bestCategory))
                 score = outcome[i];
             avgScore += outcome[i];
         }
 
         avgScore = avgScore / categorizer.getNumberOfCategories();
 
-        if(score >= MIN_SCORE || (ALLOW_AVG_SCORE && score >= (avgScore+AVG_SCORE_DIFF)))
+        if (score >= MIN_SCORE || (ALLOW_AVG_SCORE && score >= (avgScore + AVG_SCORE_DIFF)))
             return new AgentResponse(startTime, message, agent.getIntentManager().findIntent(bestCategory), inputContexts, inputParameters, score);
 
         return new AgentResponse(startTime, message, agent.getIntentManager().getFallbackIntent(), inputContexts, inputParameters, score);
@@ -88,8 +88,8 @@ public class TrainingManager {
         String fulfilmentMessage = null;
         double fulfilmentScore = 0;
 
-        for(Context context : inputContexts) {
-            if(context.getName().equals("dialog")) {
+        for (Context context : inputContexts) {
+            if (context.getName().equals("dialog")) {
                 fulfilmentIntent = agent.getIntentManager().findIntent(context.getValue().get("intent").getAsString());
                 inputParameters.put(context.getValue().get("parameter").getAsString(), message);
                 fulfilmentMessage = context.getValue().get("message").getAsString();
@@ -97,7 +97,7 @@ public class TrainingManager {
             }
         }
 
-        if(fulfilmentIntent != null)
+        if (fulfilmentIntent != null)
             return new AgentResponse(startTime, fulfilmentMessage, fulfilmentIntent, inputContexts, inputParameters, fulfilmentScore);
         else
             inputParameters.clear();
@@ -109,17 +109,24 @@ public class TrainingManager {
         int identifier = Context.getIdentifyer(inputContexts);
         DocumentCategorizerME categorizer = categorizerMap.get(identifier);
 
-        if(categorizer != null)
+        if (categorizer != null)
             return categorizer;
 
         List<Intent> intentsToTrain = agent.getIntentManager().findIntents(inputContexts);
 
-        if(intentsToTrain.size() < 1)
+        if (intentsToTrain.size() < 1)
             return null;
 
         // Train Intents
         List<DocumentSample> categoryStreams = new ArrayList<>();
         for (Intent intent : intentsToTrain) {
+            if (intent.getDocumentSamples().isEmpty()) {
+                continue;
+            }
+            System.out.println("-> intentsToTrain. " + intent.getName());
+            for (DocumentSample sample : intent.getDocumentSamples()) {
+                System.out.println("---> samples " + sample.toString());
+            }
             categoryStreams.addAll(intent.getDocumentSamples());
         }
         // define the training parameters

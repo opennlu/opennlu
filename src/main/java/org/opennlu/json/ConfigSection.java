@@ -11,7 +11,8 @@ import java.util.List;
  * Created by René Preuß on 6/15/2017.
  */
 public class ConfigSection {
-    private static final Type stringListType = new TypeToken<List<String>>() {}.getType();
+    private static final Type stringListType = new TypeToken<List<String>>() {
+    }.getType();
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     private final JsonObject jsonObject;
@@ -25,7 +26,7 @@ public class ConfigSection {
     }
 
     public ConfigSection getConfigSection(String memberName) {
-        if(has(memberName))
+        if (has(memberName))
             return new ConfigSection(jsonObject.getAsJsonObject(memberName));
         JsonObject newJsonSection = new JsonObject();
         jsonObject.add(memberName, newJsonSection);
@@ -34,7 +35,7 @@ public class ConfigSection {
 
     public List<ConfigSection> getConfigSectionList(String memberName) {
         List<ConfigSection> configurationSections = new ArrayList<>();
-        for(JsonElement jsonObjectSection : jsonObject.get(memberName).getAsJsonArray()) {
+        for (JsonElement jsonObjectSection : jsonObject.get(memberName).getAsJsonArray()) {
             configurationSections.add(new ConfigSection(jsonObjectSection.getAsJsonObject()));
         }
         return configurationSections;
@@ -53,7 +54,7 @@ public class ConfigSection {
     }
 
     public String getString(String memberName, String defaultValue) {
-        if(has(memberName))
+        if (has(memberName))
             return get(memberName).getAsString();
         return defaultValue;
     }
@@ -63,7 +64,7 @@ public class ConfigSection {
     }
 
     public int getInt(String memberName, int defaultValue) {
-        if(has(memberName))
+        if (has(memberName))
             return get(memberName).getAsInt();
         return defaultValue;
     }
@@ -73,7 +74,7 @@ public class ConfigSection {
     }
 
     public boolean getBoolean(String memberName, boolean defaultValue) {
-        if(has(memberName))
+        if (has(memberName))
             return get(memberName).getAsBoolean();
         return defaultValue;
     }
@@ -83,7 +84,7 @@ public class ConfigSection {
     }
 
     public List<String> getList(String memberName, List<String> defaultValue) {
-        if(has(memberName))
+        if (has(memberName))
             return gson.fromJson(get(memberName), stringListType);
         return defaultValue;
     }
@@ -117,22 +118,22 @@ public class ConfigSection {
     }
 
     public void setIfNull(String memberName, String s) {
-        if(!has(memberName))
+        if (!has(memberName))
             jsonObject.addProperty(memberName, s);
     }
 
     public void setIfNull(String memberName, int i) {
-        if(!has(memberName))
+        if (!has(memberName))
             jsonObject.addProperty(memberName, i);
     }
 
     public void setIfNull(String memberName, boolean b) {
-        if(!has(memberName))
+        if (!has(memberName))
             jsonObject.addProperty(memberName, b);
     }
 
     public void setIfNull(String memberName, List<String> strings) {
-        if(!has(memberName))
+        if (!has(memberName))
             jsonObject.add(memberName, gson.toJsonTree(strings, stringListType));
     }
 

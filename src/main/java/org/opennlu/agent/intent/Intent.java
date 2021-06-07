@@ -40,7 +40,7 @@ public class Intent {
         this.textResponses = textResponses;
 
         // Train parameters
-        for(Parameter parameter : parameterList) {
+        for (Parameter parameter : parameterList) {
             parameter.getEntity().train(this);
         }
     }
@@ -85,19 +85,19 @@ public class Intent {
         JsonObject jsonIntentObject = new JsonObject();
         jsonIntentObject.addProperty("name", getName());
         JsonArray jsonUserSaysArray = new JsonArray();
-        for(String userSay : getRawStrings()) {
+        for (String userSay : getRawStrings()) {
             jsonUserSaysArray.add(new JsonPrimitive(userSay));
         }
         jsonIntentObject.add("user_says", jsonUserSaysArray);
         jsonIntentObject.addProperty("action", getAction());
         JsonArray jsonParameterArray = new JsonArray();
-        for(Parameter parameter : getParameters()) {
+        for (Parameter parameter : getParameters()) {
             JsonObject jsonParameterObject = new JsonObject();
             jsonParameterObject.addProperty("name", parameter.getName());
             jsonParameterObject.addProperty("required", parameter.isRequired());
             jsonParameterObject.addProperty("entity", parameter.getEntity().getName());
             JsonArray jsonFallbackStringArray = new JsonArray();
-            for(String fallbackString : parameter.getFallbackStrings()) {
+            for (String fallbackString : parameter.getFallbackStrings()) {
                 jsonFallbackStringArray.add(new JsonPrimitive(fallbackString));
             }
             jsonParameterObject.add("fallback", jsonFallbackStringArray);
@@ -106,7 +106,7 @@ public class Intent {
         jsonIntentObject.add("parameters", jsonParameterArray);
         JsonObject jsonResponseObject = new JsonObject();
         JsonArray jsonTextResponseArray = new JsonArray();
-        for(String responseString : getRawStrings()) {
+        for (String responseString : getRawStrings()) {
             jsonTextResponseArray.add(new JsonPrimitive(responseString));
         }
         jsonResponseObject.add("text_response", jsonTextResponseArray);

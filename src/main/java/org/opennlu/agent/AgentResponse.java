@@ -37,17 +37,17 @@ public class AgentResponse {
         String[] tokens = WhitespaceTokenizer.INSTANCE.tokenize(message);
 
         for (Parameter parameter : intent.getParameters()) {
-            if(inputParameters.containsKey(parameter.getName())) {
+            if (inputParameters.containsKey(parameter.getName())) {
                 entityValues.put(parameter.getEntity().getName(), inputParameters.get(parameter.getName()));
             } else {
                 Span[] spans = parameter.getEntity().getTokenNameFinder().find(tokens);
                 String[] names = Span.spansToStrings(spans, tokens);
                 String value = String.join(" ", names);
 
-                if(value.length() > 0) {
+                if (value.length() > 0) {
                     entityValues.put(parameter.getEntity().getName(), value);
                 } else {
-                    if(parameter.isRequired() && missedParameter == null) {
+                    if (parameter.isRequired() && missedParameter == null) {
                         JsonObject dialogObject = new JsonObject();
                         dialogObject.addProperty("intent", intent.getName());
                         dialogObject.addProperty("parameter", parameter.getName());
@@ -64,14 +64,14 @@ public class AgentResponse {
 
 
         // recalculate context
-        for(Context context : inputContexts) {
-            if(context.decreaseTimeToLive())
+        for (Context context : inputContexts) {
+            if (context.decreaseTimeToLive())
                 outputContexts.add(context);
         }
 
-        for(Context context : intent.getOutputContexts()) {
+        for (Context context : intent.getOutputContexts()) {
             Context newInputContext = existsContext(outputContexts, context);
-            if(newInputContext ==  null) {
+            if (newInputContext == null) {
                 outputContexts.add(context);
             } else {
                 outputContexts.remove(newInputContext);
@@ -81,7 +81,7 @@ public class AgentResponse {
 
     private Context existsContext(List<Context> outputContexts, Context searchedContext) {
         for (Context context : outputContexts)
-            if(context.getName().equals(searchedContext.getName()))
+            if (context.getName().equals(searchedContext.getName()))
                 return context;
         return null;
     }
@@ -91,7 +91,7 @@ public class AgentResponse {
     }
 
     public Fulfillment getFulfillment() {
-        if(missedParameter != null) {
+        if (missedParameter != null) {
             return new ParameterFulfillment(this, missedParameter);
         }
 
@@ -113,12 +113,12 @@ public class AgentResponse {
         jsonObject.addProperty("intent", getIntent().getName());
         jsonObject.add("fulfillment", getFulfillment().toJson());
         JsonArray jsonContextArray = new JsonArray();
-        for(Context context : getContext()) {
+        for (Context context : getContext()) {
             jsonContextArray.add(context.toJson());
         }
         jsonObject.add("context", jsonContextArray);
         JsonArray jsonPropertyArray = new JsonArray();
-        for(Parameter property : getIntent().getParameters()) {
+        for (Parameter property : getIntent().getParameters()) {
             JsonObject jsonPropertyObject = new JsonObject();
             jsonPropertyObject.addProperty("name", property.getName());
             jsonPropertyObject.addProperty("entity", property.getEntity().getName());
@@ -142,7 +142,7 @@ public class AgentResponse {
     }
 
     public void stopMeasurement() {
-        if(executionTime == 0) {
+        if (executionTime == 0) {
             executionTime = System.nanoTime() - startTime;
         }
     }

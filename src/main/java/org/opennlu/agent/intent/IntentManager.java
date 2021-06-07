@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class IntentManager {
     private final Agent agent;
-    private List<Intent> intents = new ArrayList<>();
+    private final List<Intent> intents = new ArrayList<>();
 
     public IntentManager(Agent agent) throws Exception {
         this.agent = agent;
@@ -29,29 +29,38 @@ public class IntentManager {
                 "fallback",
                 new ArrayList<>(),
                 Arrays.asList(
-                        "Kannst Du bitte deine Frage umformulieren.",
-                        "Ich habe dich nicht verstanden.",
-                        "Entschuldigung! Ich bin mir noch nicht sicher, wie ich dir da helfen kann."
+                        "I didn't get that. Can you say it again?",
+                        "I missed what you said. What was that?",
+                        "Sorry, could you say that again?",
+                        "Sorry, can you say that again?",
+                        "Can you say that again?",
+                        "Sorry, I didn't get that. Can you rephrase?",
+                        "Sorry, what was that?",
+                        "One more time?",
+                        "What was that?",
+                        "Say that one more time?",
+                        "I didn't get that. Can you repeat?",
+                        "I missed that, say that again?"
                 )
         ));
     }
 
     public Intent findIntent(String name) {
         for (Intent intent : intents)
-            if(intent.getName().equals(name))
+            if (intent.getName().equals(name))
                 return intent;
         return null;
     }
 
     public Intent registerIntent(ConfigSection intentConfiguration) throws Exception {
 
-        if(!intentConfiguration.has("name")) {
+        if (!intentConfiguration.has("name")) {
             throw new Exception("The parameter 'name' is missing.");
-        } else if(!intentConfiguration.has("user_says")) {
+        } else if (!intentConfiguration.has("user_says")) {
             throw new Exception("The parameter 'user_says' is missing.");
-        } else if(!intentConfiguration.has("response")) {
+        } else if (!intentConfiguration.has("response")) {
             throw new Exception("The parameter 'response' is missing.");
-        } else if(!intentConfiguration.getConfigSection("response").has("text_response")) {
+        } else if (!intentConfiguration.getConfigSection("response").has("text_response")) {
             throw new Exception("The parameter 'response.text_response' is missing.");
         } else {
             String intentName = intentConfiguration.get("name").getAsString();
@@ -124,25 +133,25 @@ public class IntentManager {
     public List<Intent> findIntents(List<Context> inputContexts) {
         List<Intent> selectedIntents = new ArrayList<>();
 
-        if(inputContexts.size() < 1) {
+        if (inputContexts.size() < 1) {
             for (Intent intent : intents)
-                if(intent.getInputContexts().size() < 1)
+                if (intent.getInputContexts().size() < 1)
                     selectedIntents.add(intent);
 
             return selectedIntents;
         }
 
         for (Intent intent : intents)
-            for(Context context : intent.getInputContexts())
-                for(Context inputContext : inputContexts)
-                    if(context.getName().equals(inputContext.getName()))
+            for (Context context : intent.getInputContexts())
+                for (Context inputContext : inputContexts)
+                    if (context.getName().equals(inputContext.getName()))
                         selectedIntents.add(intent);
 
         return selectedIntents;
     }
 
     public void forgetIntents() {
-        for(Intent intent : intents) {
+        for (Intent intent : intents) {
             unregisterIntent(intent);
         }
     }

@@ -2,7 +2,6 @@ package org.opennlu.agent;
 
 import org.opennlu.OpenNLU;
 import org.opennlu.agent.entity.EntityManager;
-import org.opennlu.agent.intent.Intent;
 import org.opennlu.agent.intent.IntentManager;
 import org.opennlu.agent.session.SessionManager;
 import org.opennlu.agent.skill.Skill;

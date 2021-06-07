@@ -16,7 +16,7 @@ public class JsonConfig extends ConfigSection {
     }
 
     public static JsonConfig loadConfiguration(File jsonFile) throws IOException {
-        if(jsonFile.exists()) {
+        if (jsonFile.exists()) {
             try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(jsonFile))) {
                 return new JsonConfig(new JsonParser().parse(inputStreamReader).getAsJsonObject());
             }
@@ -25,16 +25,16 @@ public class JsonConfig extends ConfigSection {
         }
     }
 
+    public static JsonConfig fromString(String jsonString) throws FileNotFoundException {
+        return new JsonConfig(new JsonParser().parse(jsonString).getAsJsonObject());
+    }
+
     public void save(File jsonFile) throws IOException {
-        if(!jsonFile.exists())
-            if(!jsonFile.createNewFile())
+        if (!jsonFile.exists())
+            if (!jsonFile.createNewFile())
                 throw new IOException("Cannot create file.");
         try (OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(jsonFile))) {
             outputStreamWriter.write(toJson());
         }
-    }
-
-    public static JsonConfig fromString(String jsonString) throws FileNotFoundException {
-        return new JsonConfig(new JsonParser().parse(jsonString).getAsJsonObject());
     }
 }

@@ -25,15 +25,15 @@ public class EntityManager {
 
     public Entity findEntity(String name) {
         for (Entity entity : entities)
-            if(entity.getName().equals(name))
+            if (entity.getName().equals(name))
                 return entity;
         return null;
     }
 
     public Entity registerEntity(ConfigSection entityConfiguration) throws Exception {
-        if(!entityConfiguration.has("name")) {
+        if (!entityConfiguration.has("name")) {
             throw new Exception("The parameter 'name' is missing.");
-        } else if(!entityConfiguration.has("type")) {
+        } else if (!entityConfiguration.has("type")) {
             throw new Exception("The parameter 'type' is missing.");
         } else {
             EntityType entityType = EntityType.valueOf(entityConfiguration.getString("type"));

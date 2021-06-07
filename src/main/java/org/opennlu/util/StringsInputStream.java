@@ -10,7 +10,7 @@ import java.io.InputStream;
 /**
  * Created by René Preuß on 6/14/2017.
  */
-public class StringsInputStream <T extends Iterable<String>> extends InputStream implements InputStreamFactory {
+public class StringsInputStream<T extends Iterable<String>> extends InputStream implements InputStreamFactory {
 
     private ByteArrayInputStream bais = null;
 

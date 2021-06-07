@@ -6,7 +6,10 @@ import org.opennlu.agent.AgentResponse;
 import org.opennlu.agent.context.Context;
 import org.opennlu.agent.intent.Parameter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by René Preuß on 8/31/2017.
@@ -40,8 +43,8 @@ public class Session {
         AgentResponse agentResponse = agent.getTrainingManager().parse(message, inputContext, inputParameters);
         this.inputContext = agentResponse.getContext();
         this.inputParameters = new HashMap<>();
-        for(Parameter parameter : agentResponse.getIntent().getParameters()) {
-            if(agentResponse.getEntityValues().containsKey(parameter.getEntity().getName()))
+        for (Parameter parameter : agentResponse.getIntent().getParameters()) {
+            if (agentResponse.getEntityValues().containsKey(parameter.getEntity().getName()))
                 this.inputParameters.put(parameter.getName(), agentResponse.getEntityValues().get(parameter.getEntity().getName()));
         }
         agentResponse.stopMeasurement();

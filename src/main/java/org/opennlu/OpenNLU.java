@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class OpenNLU {
     private final ConfigSection configSection;
-    private Database database;
-    private Map<Integer, Agent> agentCache = new HashMap<>();
+    private final Database database;
+    private final Map<Integer, Agent> agentCache = new HashMap<>();
 
     public OpenNLU(ConfigSection configSection) {
         this.configSection = configSection;
@@ -48,7 +48,7 @@ public class OpenNLU {
 
     public Agent getAgent(int agentId) throws Exception {
         Agent agent = agentCache.get(agentId);
-        if(agent == null) {
+        if (agent == null) {
             agent = new Agent(this, agentId);
             agentCache.put(agentId, agent);
         }

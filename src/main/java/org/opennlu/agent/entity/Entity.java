@@ -37,8 +37,9 @@ public abstract class Entity {
     }
 
     public void train(Intent intent) throws IOException {
-        for(String rawString : intent.getRawStrings()) {
-            if(rawString.contains(name + "{")) {
+        for (String rawString : intent.getRawStrings()) {
+            System.out.println("Train intent rawString: " + rawString);
+            if (rawString.contains(name + "{")) {
                 samplesList.add(rawString.replaceAll("@[a-z0-9.-]*\\{([^}]*)}", "<START:" + name.substring(1) + "> $1 <END>"));
             }
         }

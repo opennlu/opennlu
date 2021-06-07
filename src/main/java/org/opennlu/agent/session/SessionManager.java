@@ -9,7 +9,7 @@ import java.util.List;
  * Created by René Preuß on 8/31/2017.
  */
 public class SessionManager {
-    private Agent agent;
+    private final Agent agent;
 
     public SessionManager(Agent agent) {
         this.agent = agent;

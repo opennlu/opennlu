@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.opennlu.OpenNLU;
 import org.opennlu.agent.Agent;
 import org.opennlu.agent.AgentResponse;
-import org.opennlu.agent.context.Context;
 import org.opennlu.agent.session.Session;
 import org.opennlu.agent.skill.Skill;
 import tests.nlu.agent.AgentTest;
@@ -13,9 +12,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 

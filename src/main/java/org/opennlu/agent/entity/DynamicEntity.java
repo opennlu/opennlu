@@ -24,8 +24,8 @@ public class DynamicEntity extends Entity {
 
     @Override
     public void train(String language) throws Exception {
-        for(String line : getSamples()) {
-            System.out.println(String.format("Apply training for '%s'...", line));
+        for (String line : getSamples()) {
+            System.out.printf("Apply training for '%s'...%n", line);
         }
 
         // reading training data
@@ -45,7 +45,7 @@ public class DynamicEntity extends Entity {
         params.put(TrainingParameters.CUTOFF_PARAM, String.valueOf(1));
 
         // training the model using TokenNameFinderModel class
-        TokenNameFinderModel nameFinderModel = NameFinderME.train("en", null, sampleStream,
+        TokenNameFinderModel nameFinderModel = NameFinderME.train(language, null, sampleStream,
                 params, TokenNameFinderFactory.create(null, null, Collections.emptyMap(), new BioCodec()));
 
         setTokenNameFinder(new NameFinderME(nameFinderModel));
@@ -57,7 +57,8 @@ public class DynamicEntity extends Entity {
         jsonEntityObject.addProperty("name", getName());
         jsonEntityObject.addProperty("type", getType().name());
         JsonArray jsonUserSayArray = new JsonArray();
-        for(String sample : getSamples()) {
+        for (String sample : getSamples()) {
+            System.out.println("Sample UserSays: " + sample);
             jsonUserSayArray.add(new JsonPrimitive(sample));
         }
         jsonEntityObject.add("user_says", jsonUserSayArray);
