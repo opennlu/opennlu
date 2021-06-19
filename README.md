@@ -9,7 +9,7 @@ OpenNLU (Natural Language Understanding) is a tool for intent classification and
 
 OpenNLU is used to build next-generation bots and assistants that engage in human-like, layered conversations.
 
-![OpenNLU Overview](docs/assets/images/OpenNLU.png)
+![OpenNLU Overview](docs/assets/images/opennlu-2021.png)
 
 # Contents
 
