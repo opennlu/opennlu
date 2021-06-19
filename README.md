@@ -52,17 +52,17 @@ work, are complete, nor that they do not cause any harm to your system or your a
 
 ### Tools
 
-* **[OpenNLU-Dashboard](https://github.com/GhostZero/OpenNLU-Dashboard) — Official web agent, intent & entity editor**
+* **[OpenNLU Console](https://github.com/opennlu/console) — Official web agent, intent & entity editor**
 
 ### Libraries
 
 #### PHP
 
-* **[NLU-PHP-Client](https://git.preuss.io/KaedeAI/NLU-PHP-Client) — Official library for PHP**
+* **[PHP Client for OpenNLU](https://github.com/opennlu/php-client) — Official library for PHP**
 
 #### Java
 
-* **[NLU-Java-Client](https://git.preuss.io/KaedeAI/NLU-Java-Client) — Official library for Java**
+* **[Java Client for OpenNLU](hhttps://github.com/opennlu/java-client) — Official library for Java**
 
 ## How to contribute
 
