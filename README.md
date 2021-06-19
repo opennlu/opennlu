@@ -62,7 +62,7 @@ work, are complete, nor that they do not cause any harm to your system or your a
 
 #### Java
 
-* **[Java Client for OpenNLU](hhttps://github.com/opennlu/java-client) — Official library for Java**
+* **[Java Client for OpenNLU](https://github.com/opennlu/java-client) — Official library for Java**
 
 ## How to contribute
 
