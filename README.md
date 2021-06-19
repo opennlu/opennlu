@@ -1,8 +1,5 @@
-> **WARNING:** The domains opennlu.org and opennlu.com no longer belong to us! They have been registered by a third person who does not belong to this project. The new address will be [opennlu.bitinflow.com](https://opennlu.bitinflow.com)!
-
-[![Discord](https://discordapp.com/api/guilds/373468864098336768/embed.png)](https://ghostzero.me/discord)
-[![License: MIT](https://img.shields.io/github/license/GhostZero/OpenNLU.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/travis/GhostZero/OpenNLU/master.svg)](https://travis-ci.org/GhostZero/OpenNLU)
+[![Discord](https://discordapp.com/api/guilds/373468864098336768/embed.png)](https://discord.gg/qsxVMNg)
+[![License: MIT](https://img.shields.io/github/license/opennlu/opennlu.svg)](https://opensource.org/licenses/MIT)
 
 # OpenNLU - Open Source Conversational AI
 
