@@ -1,5 +1,5 @@
-[![Discord](https://discordapp.com/api/guilds/373468864098336768/embed.png)](https://discord.gg/qsxVMNg)
 [![License: MIT](https://img.shields.io/github/license/opennlu/opennlu.svg)](https://opensource.org/licenses/MIT)
+<a href="https://ghostzero.dev/discord"><img src="https://discordapp.com/api/guilds/590942233126240261/embed.png?style=shield" alt="Discord"></a>
 
 # OpenNLU - Open Source Conversational AI
 
