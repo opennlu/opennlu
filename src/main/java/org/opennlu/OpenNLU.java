@@ -29,6 +29,7 @@ public class OpenNLU {
 
     public static ConfigSection getLocalConfig(File configFile) throws IOException {
         JsonConfig config = JsonConfig.loadConfiguration(configFile);
+        config.getConfigSection("SQL").setIfNull("Connection", "mysql");
         config.getConfigSection("SQL").setIfNull("ConnectionString", "jdbc:mysql://localhost/nlu?connectTimeout=0&autoReconnect=true");
         config.getConfigSection("SQL").setIfNull("Username", "root");
         config.getConfigSection("SQL").setIfNull("Password", "");

@@ -18,7 +18,8 @@ public class RegexEntity extends Entity {
 
     @Override
     public void train(String language) throws Exception {
-        setTokenNameFinder(new RegexNameFinder(patterns));
+        // todo: find a better way to train this
+        setTokenNameFinder(new RegexNameFinder(patterns, "en"));
     }
 
     @Override

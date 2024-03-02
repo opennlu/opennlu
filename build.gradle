@@ -11,25 +11,18 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.google.code.gson:gson:2.8.1'
-    implementation 'org.apache.opennlp:opennlp-tools:1.7.2'
+    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'org.apache.opennlp:opennlp-tools:2.3.1'
     implementation 'commons-io:commons-io:2.7'
-    implementation 'com.sparkjava:spark-core:2.7.2'
+    implementation 'com.sparkjava:spark-core:2.9.4'
     implementation 'org.jdbi:jdbi:2.75'
-    implementation 'mysql:mysql-connector-java:5.1.42'
-    implementation 'com.auth0:java-jwt:3.0.1'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'org.xerial:sqlite-jdbc:3.44.1.0'
+    implementation 'com.auth0:java-jwt:4.4.0'
     testImplementation 'junit:junit:4.13.1'
 }
 
 group = 'org.opennlu'
-version = '0.3-SNAPSHOT'
+version = '0.4-SNAPSHOT'
 description = 'opennlu'
 java.sourceCompatibility = JavaVersion.VERSION_1_8
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
-        }
-    }
-}
