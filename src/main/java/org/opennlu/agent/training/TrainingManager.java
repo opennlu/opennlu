@@ -37,7 +37,7 @@ public class TrainingManager {
     public void trainEntities() {
         // Train Entity
         for (Entity entity : agent.getEntityManager().getEntities()) {
-            if (entity.getSamples().size() > 0) {
+            if (!entity.getSamples().isEmpty()) {
                 try {
                     entity.train(agent.getLanguage());
                 } catch (Exception e) {
@@ -64,7 +64,8 @@ public class TrainingManager {
         if (categorizer == null)
             return new AgentResponse(startTime, message, agent.getIntentManager().getFallbackIntent(), inputContexts, inputParameters, 0);
 
-        double[] outcome = categorizer.categorize(message.toLowerCase());
+        String[] tokens = message.toLowerCase().split("\\s+");
+        double[] outcome = categorizer.categorize(tokens);
         double score = 0;
         double avgScore = 0;
 

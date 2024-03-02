@@ -21,7 +21,8 @@ public class EnumEntity extends Entity {
 
     @Override
     public void train(String language) throws Exception {
-        setTokenNameFinder(new RegexNameFinder(patterns));
+        // fixme: find a better way to train this
+        setTokenNameFinder(new RegexNameFinder(patterns, "en"));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package org.opennlu.jdbi;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
+import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 import org.opennlu.OpenNLU;
 import org.opennlu.agent.Agent;
 import org.opennlu.agent.AgentResponse;
@@ -10,8 +10,11 @@ import org.opennlu.jdbi.mapper.*;
 import org.opennlu.json.ConfigSection;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
+import org.sqlite.SQLiteConfig;
+import org.sqlite.SQLiteDataSource;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Database {
 
@@ -20,10 +23,33 @@ public class Database {
 
     public Database(OpenNLU openNLU) {
         this.openNLU = openNLU;
+        String dbType = openNLU.getConfig().getConfigSection("SQL").getString("Connection");
+        switch (Objects.requireNonNull(dbType).toLowerCase()) {
+            case "mysql":
+                setupMySQL();
+                break;
+            case "sqlite":
+                setupSQLite();
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported database type: " + dbType);
+        }
+    }
+
+    private void setupMySQL() {
         MysqlConnectionPoolDataSource dbPool = new MysqlConnectionPoolDataSource();
+        ConfigSection sqlConfig = openNLU.getConfig().getConfigSection("SQL");
+        dbPool.setUrl(sqlConfig.getString("ConnectionString"));
+        dbPool.setUser(sqlConfig.getString("Username"));
+        dbPool.setPassword(sqlConfig.getString("Password"));
+        handle = new DBI(dbPool).open();
+    }
+
+    private void setupSQLite() {
+        SQLiteDataSource dbPool = new SQLiteDataSource();
+        SQLiteConfig config = new SQLiteConfig();
+        config.enforceForeignKeys(true);
         dbPool.setUrl(openNLU.getConfig().getConfigSection("SQL").getString("ConnectionString"));
-        dbPool.setUser(openNLU.getConfig().getConfigSection("SQL").getString("Username"));
-        dbPool.setPassword(openNLU.getConfig().getConfigSection("SQL").getString("Password"));
         handle = new DBI(dbPool).open();
     }
 
